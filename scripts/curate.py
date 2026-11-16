@@ -17,6 +17,7 @@ def main():
     lic, pc = C.cfg("licenses"), C.cfg("pipeline")
     human = {r["candidate_id"]: r["decision"].strip().lower() for r in C.read_csv(C.p("human_decisions"))}
     approved, flags, rejected, owner = [], [], [], {}
+    bad_tags = {t.lower() for t in pc.get("reject_tags", [])}  # exact tag match, e.g. loops; human approve overrides
     d = C.p("candidates_dir")
     for f in sorted(d.glob("*.csv")) if d.exists() else []:
         for r in C.read_csv(f):
@@ -36,6 +37,8 @@ def main():
                 reject("duration out of range")
             elif dec == "reject":
                 reject("human decision")
+            elif dec != "approve" and bad_tags & set(r.get("tags", "").lower().split()):
+                reject("tag " + ",".join(sorted(bad_tags & set(r["tags"].lower().split()))))
             elif r.get("gen_ai_preference") == "no-gen-ai":
                 reject("uploader gen_ai_preference no-gen-ai")
             elif code in lic["reject"]:
