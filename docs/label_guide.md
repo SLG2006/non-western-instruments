@@ -13,10 +13,10 @@ Label by ear. The label is the instrument you hear, whatever the uploader called
 | 2 | pipa | chinese | plucked | pipa lute, chinese pipa, 琵琶 | TODO | 'pipa' also means pipe (Swedish) and a frog genus; screen titles. |
 | 3 | dizi | chinese | wind | dizi flute, chinese bamboo flute, 笛子 | TODO |  |
 | 4 | guzheng | chinese | zither | guzheng, gu zheng, 古筝 | TODO | Cousin is a proposal; no Western zither is collected. Confirm. |
-| 5 | charango | andean | plucked | charango | TODO |  |
+| 5 | charango | andean | plucked | charango, ronroco, walaycho (hualaycho) | TODO | Ronroco and walaycho count as charango (decided 2026-11-16). |
 | 6 | quena | andean | wind | quena, kena flute, andean flute | TODO |  |
 | 7 | siku | andean | wind | siku, zampoña, zampona, antara panpipe, andean panpipe | TODO |  |
-| 8 | bombo | andean | drum | bombo legüero, bombo leguero, bombo andino | TODO |  |
+| 8 | bombo | andean | drum | bombo legüero, bombo leguero, bombo andino | Western bass drum, kick drums, synthesized drums, maracatu and other non-Andean bombos | Reported as insufficient data (decided 2026-11-16). |
 | 9 | oud | middle_east | plucked | oud, ud lute, عود | TODO | 'oud' is Dutch for 'old'; Commons search is noisy. |
 | 10 | ney | middle_east | wind | ney flute, nay flute, ney turkish, ney arabic | TODO | Include Turkish and Arab ney; exclude Persian ney only if the label guide says so. |
 | 11 | qanun | middle_east | zither | qanun, kanun instrument, qanoun | TODO | Cousin is a proposal. Confirm. |
@@ -37,6 +37,8 @@ Label by ear. The label is the instrument you hear, whatever the uploader called
 - Clip ids end in the window rank (`_0` = loudest). The first cut (2026-11-15, 32 kHz, up to 3 clips per recording before moving on) was set aside in `data/clips_v0/` and is not used.
 
 ## Decisions to record here
+- **charango variants (decided 2026-11-16):** ronroco (larger, lower-tuned) and walaycho (smaller, higher-tuned) count as charango. They share the charango's construction and playing tradition; register differs. Record the variant in the clip note when you can hear it.
+- **bombo (decided 2026-11-16):** kept in the plan but reported as insufficient data. After broadened searches, Freesound and Commons gave 15 approved recordings whose metadata point to synth kicks, rhythm exercises, maracatu and a street march, with 0 to 2 plausible bombo legüero. Label them by ear anyway; report bombo with its real n and the reason.
 - **erhu vs. other huqin (decided 2026-11-15):** exclude jinghu, gaohu, zhonghu and banhu. Reason: they share erhu's construction but differ in register and timbre (jinghu and gaohu are much higher; banhu has a wooden soundboard), so folding them in widens the class beyond one instrument and makes the erhu vs. violin comparison noisier. Metadata mentions of other huqin do not reject a clip on their own; the label is decided by ear.
 - **Ceremonial and consent context (decided 2026-11-15):** reject recordings of funerals and other rites whose participants could not reasonably have agreed to dataset use (first case: fs:453003, Taoist funeral, Bangkok). Recordings that only mention a temple as the venue are labeled normally, unless what you hear suggests a rite is in progress.
 - Which ney variants count (Turkish, Arab, Persian)?
