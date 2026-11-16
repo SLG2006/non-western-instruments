@@ -2,6 +2,8 @@
 """Stage 4 (label-desk): build the listening queue and compute self-agreement.
 
   python3 scripts/label_desk.py queue        # pass 1 for unlabeled clips; pass 2 once pass 1 is complete
+  python3 scripts/label_desk.py next         # pass 1 for the next listening group with unlabeled clips
+  python3 scripts/label_desk.py groups       # progress per listening group
   python3 scripts/label_desk.py agreement    # writes labels/agreement.json and labels/summary.json
 
 This script never writes labels/labels.csv. Only the human does, through
@@ -15,17 +17,61 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C
 
 
-def queue():
-    pc = C.cfg("pipeline")
+# Listening groups (author's choice, 2026-11-16): at most three similar instruments per queue, so the
+# labeler compares like with like. Groups are by the batch a clip was cut under; the label is still what
+# is heard, so a quena cut under dizi is labeled quena. Order follows the collection priority.
+GROUPS = [
+    ["erhu", "violin"],                 # bowed strings (done first)
+    ["oud", "pipa", "sitar"],           # plucked lutes, Asian and Middle Eastern
+    ["charango", "acoustic_guitar"],    # small Andean lute vs. guitar
+    ["dizi", "flute"],                  # transverse flutes
+    ["ney", "quena", "siku"],           # end-blown flutes and panpipe
+    ["guzheng", "qanun"],               # plucked zithers
+    ["darbuka", "tabla"],               # hand drums
+    ["snare_drum", "bombo"],            # stick-played drums
+]
+
+
+def _status():
     clips = C.read_csv(C.p("clips"))
     labels = C.read_csv(C.p("labels"))
     p1 = {r["clip_id"] for r in labels if r["pass"] == "1"}
+    return clips, labels, p1
+
+
+def groups():
+    clips, _, p1 = _status()
+    for g in GROUPS:
+        cs = [c for c in clips if c["instrument"] in g]
+        done = sum(c["clip_id"] in p1 for c in cs)
+        print(f"  {' + '.join(g):32s} {done:4d}/{len(cs):<4d} labeled")
+    other = sorted({c["instrument"] for c in clips} - {i for g in GROUPS for i in g})
+    if other:
+        print("  not in any group:", ", ".join(other))
+
+
+def next_group():
+    clips, _, p1 = _status()
+    for g in GROUPS:
+        if any(c["instrument"] in g and c["clip_id"] not in p1 for c in clips):
+            return queue(g)
+    return queue()
+
+
+def queue(only=None):
+    pc = C.cfg("pipeline")
+    clips, labels, p1 = _status()
     p2 = {r["clip_id"] for r in labels if r["pass"] == "2"}
     rng = random.Random(pc["seed"])
-    todo = [c for c in clips if c["clip_id"] not in p1]
+    todo = [c for c in clips if c["clip_id"] not in p1 and (only is None or c["instrument"] in only)]
     rng.shuffle(todo)
     rows = [{"clip_id": c["clip_id"], "path": c["path"], "pass": "1"} for c in todo]
-    if clips and not todo:
+    if only is not None:
+        C.write_csv(C.p("queue"), rows, C.schema("queue"))
+        print(f"queue: {len(rows)} clips to label (pass 1), group: {' + '.join(only)}; "
+              f"{len(p1)}/{len(clips)} clips have a pass-1 label overall")
+        return
+    if clips and not [c for c in clips if c["clip_id"] not in p1]:
         # Blind re-label sample: fixed by the seed, so it cannot be cherry-picked.
         pool = sorted(c["clip_id"] for c in clips)
         random.Random(pc["seed"] + 1).shuffle(pool)
@@ -82,4 +128,4 @@ def agreement():
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
-    {"queue": queue, "agreement": agreement}.get(cmd, lambda: sys.exit(__doc__))()
+    {"queue": queue, "next": next_group, "groups": groups, "agreement": agreement}.get(cmd, lambda: sys.exit(__doc__))()
