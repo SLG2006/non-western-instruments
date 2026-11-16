@@ -127,15 +127,21 @@
     "Plucked string instrument"
    ],
    "freesound_queries": [
-    "charango"
+    "charango",
+    "charango solo",
+    "ronroco",
+    "walaycho",
+    "hualaycho"
    ],
    "commons_queries": [
-    "charango"
+    "charango",
+    "ronroco",
+    "walaycho"
    ],
    "commons_categories": [
     "Category:Charango"
    ],
-   "commons_title_regex": "charango",
+   "commons_title_regex": "charango|ronroco|walaycho|hualaycho",
    "note": ""
   },
   {
@@ -154,15 +160,21 @@
    "freesound_queries": [
     "quena",
     "kena flute",
-    "andean flute"
+    "andean flute",
+    "quena solo",
+    "quena andina",
+    "flauta andina",
+    "kena"
    ],
    "commons_queries": [
-    "quena"
+    "quena",
+    "flauta andina",
+    "kena"
    ],
    "commons_categories": [
     "Category:Quena"
    ],
-   "commons_title_regex": "quena|kena",
+   "commons_title_regex": "quena|kena|flauta andina",
    "note": ""
   },
   {
