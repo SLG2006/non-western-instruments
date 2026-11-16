@@ -1,0 +1,6 @@
+{
+  "_note": "HUMAN-ONLY FILE. Agents may not edit it. by-sa stays in needs_human until Dr. Cao decides; then move it to accept or reject.",
+  "accept": ["cc0", "pd", "by", "by-nc"],
+  "needs_human": ["by-sa", "by-nc-sa", "unknown", "other"],
+  "reject": ["by-nd", "by-nc-nd", "sampling+"]
+}

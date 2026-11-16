@@ -1,0 +1,45 @@
+{
+  "env": { "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1" },
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Edit(/.env)",
+      "Edit(/labels/labels.csv)",
+      "Edit(/data/human_decisions.csv)",
+      "Edit(/data/raw/**)",
+      "Bash(rm *)",
+      "Bash(git push *)",
+      "Bash(ssh *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(python3 scripts/label_tool.py *)",
+      "Bash(.venv/bin/python scripts/label_tool.py *)"
+    ],
+    "allow": [
+      "Bash(python3 scripts/*)",
+      "Bash(.venv/bin/python scripts/*)",
+      "Bash(.venv/bin/python src/*)",
+      "Bash(.venv/bin/python -m pytest *)",
+      "Bash(.venv/bin/pytest *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git checkout -b *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "Bash|Edit|Write|NotebookEdit",
+        "hooks": [ { "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/scripts/hooks/guard.py\"" } ] }
+    ],
+    "PostToolUse": [
+      { "matcher": "Bash|Edit|Write",
+        "hooks": [ { "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/scripts/hooks/post_gate.py\"" } ] }
+    ],
+    "SubagentStop": [
+      { "hooks": [ { "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/scripts/hooks/post_gate.py\"" } ] }
+    ]
+  }
+}

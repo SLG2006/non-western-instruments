@@ -1,0 +1,12 @@
+{
+  "candidates": ["candidate_id","source","source_url","title","uploader","license_raw","license_code","duration_s","instrument","query","tags","description","download_url","retrieved_at"],
+  "approved": ["candidate_id","source","source_url","title","uploader","source_group","license_code","instrument","duration_s","download_url","decided_by"],
+  "flags": ["candidate_id","instrument","source_url","title","uploader","license_code","reason"],
+  "rejected": ["candidate_id","instrument","reason"],
+  "human_decisions": ["candidate_id","decision","note"],
+  "clips": ["clip_id","candidate_id","instrument","source_group","license_code","path","start_s","duration_s","content_s","sample_rate","sha256"],
+  "queue": ["clip_id","path","pass"],
+  "labels": ["clip_id","pass","label","solo","confident","note","labeled_at"],
+  "splits": ["clip_id","instrument","source_group","split"],
+  "results_required_keys": ["experiment","model","checkpoint_sha256","seed","dataset_commit","created_at","n_clips","metrics"]
+}

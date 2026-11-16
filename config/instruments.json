@@ -1,0 +1,481 @@
+{
+ "_note": "audioset_* label strings are from memory of the AudioSet ontology; eval-engineer must verify each against class_labels_indices.csv before Test 1. Western cousins come from Freesound only, so audio quality matches.",
+ "label_extras": [
+  "reject",
+  "unsure"
+ ],
+ "instruments": [
+  {
+   "id": "erhu",
+   "display": "erhu",
+   "group": "chinese",
+   "role": "target",
+   "family": "bowed",
+   "cousin": "violin",
+   "audioset_tier": 3,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Bowed string instrument"
+   ],
+   "freesound_queries": [
+    "erhu",
+    "二胡"
+   ],
+   "commons_queries": [
+    "erhu",
+    "二胡"
+   ],
+   "commons_categories": [
+    "Category:Erhu"
+   ],
+   "commons_title_regex": "erhu|二胡",
+   "note": ""
+  },
+  {
+   "id": "pipa",
+   "display": "pipa",
+   "group": "chinese",
+   "role": "target",
+   "family": "plucked",
+   "cousin": "acoustic_guitar",
+   "audioset_tier": 3,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Plucked string instrument"
+   ],
+   "freesound_queries": [
+    "pipa lute",
+    "chinese pipa",
+    "琵琶"
+   ],
+   "commons_queries": [
+    "pipa",
+    "琵琶"
+   ],
+   "commons_categories": [
+    "Category:Pipa (musical instrument)"
+   ],
+   "commons_title_regex": "pipa|琵琶",
+   "note": "'pipa' also means pipe (Swedish) and a frog genus; screen titles."
+  },
+  {
+   "id": "dizi",
+   "display": "dizi",
+   "group": "chinese",
+   "role": "target",
+   "family": "wind",
+   "cousin": "flute",
+   "audioset_tier": 3,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Flute",
+    "Wind instrument, woodwind instrument"
+   ],
+   "freesound_queries": [
+    "dizi flute",
+    "chinese bamboo flute",
+    "笛子"
+   ],
+   "commons_queries": [
+    "dizi flute",
+    "笛子"
+   ],
+   "commons_categories": [
+    "Category:Dizi"
+   ],
+   "commons_title_regex": "dizi|笛",
+   "note": ""
+  },
+  {
+   "id": "guzheng",
+   "display": "guzheng",
+   "group": "chinese",
+   "role": "target",
+   "family": "zither",
+   "cousin": "acoustic_guitar",
+   "audioset_tier": 2,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Zither",
+    "Plucked string instrument"
+   ],
+   "freesound_queries": [
+    "guzheng",
+    "gu zheng",
+    "古筝"
+   ],
+   "commons_queries": [
+    "guzheng",
+    "古筝"
+   ],
+   "commons_categories": [
+    "Category:Guzheng"
+   ],
+   "commons_title_regex": "zheng|古筝",
+   "note": "Cousin is a proposal; no Western zither is collected. Confirm."
+  },
+  {
+   "id": "charango",
+   "display": "charango",
+   "group": "andean",
+   "role": "target",
+   "family": "plucked",
+   "cousin": "acoustic_guitar",
+   "audioset_tier": 3,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Plucked string instrument"
+   ],
+   "freesound_queries": [
+    "charango"
+   ],
+   "commons_queries": [
+    "charango"
+   ],
+   "commons_categories": [
+    "Category:Charango"
+   ],
+   "commons_title_regex": "charango",
+   "note": ""
+  },
+  {
+   "id": "quena",
+   "display": "quena",
+   "group": "andean",
+   "role": "target",
+   "family": "wind",
+   "cousin": "flute",
+   "audioset_tier": 3,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Flute",
+    "Wind instrument, woodwind instrument"
+   ],
+   "freesound_queries": [
+    "quena",
+    "kena flute",
+    "andean flute"
+   ],
+   "commons_queries": [
+    "quena"
+   ],
+   "commons_categories": [
+    "Category:Quena"
+   ],
+   "commons_title_regex": "quena|kena",
+   "note": ""
+  },
+  {
+   "id": "siku",
+   "display": "siku (zampoña)",
+   "group": "andean",
+   "role": "target",
+   "family": "wind",
+   "cousin": "flute",
+   "audioset_tier": 3,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Flute",
+    "Wind instrument, woodwind instrument"
+   ],
+   "freesound_queries": [
+    "siku",
+    "zampoña",
+    "zampona",
+    "antara panpipe",
+    "andean panpipe"
+   ],
+   "commons_queries": [
+    "siku",
+    "zampoña"
+   ],
+   "commons_categories": [
+    "Category:Siku"
+   ],
+   "commons_title_regex": "siku|zampo|antara",
+   "note": ""
+  },
+  {
+   "id": "bombo",
+   "display": "bombo legüero",
+   "group": "andean",
+   "role": "target",
+   "family": "drum",
+   "cousin": "snare_drum",
+   "audioset_tier": 2,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Drum",
+    "Percussion",
+    "Bass drum"
+   ],
+   "freesound_queries": [
+    "bombo legüero",
+    "bombo leguero",
+    "bombo andino"
+   ],
+   "commons_queries": [
+    "bombo legüero",
+    "bombo leguero"
+   ],
+   "commons_categories": [
+    "Category:Bombo legüero"
+   ],
+   "commons_title_regex": "bombo",
+   "note": ""
+  },
+  {
+   "id": "oud",
+   "display": "oud",
+   "group": "middle_east",
+   "role": "target",
+   "family": "plucked",
+   "cousin": "acoustic_guitar",
+   "audioset_tier": 3,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Plucked string instrument"
+   ],
+   "freesound_queries": [
+    "oud",
+    "ud lute",
+    "عود"
+   ],
+   "commons_queries": [
+    "oud music",
+    "oud taqsim"
+   ],
+   "commons_categories": [
+    "Category:Oud music",
+    "Category:Audio files of oud music"
+   ],
+   "commons_title_regex": "(^|[^a-z])oud([^a-z]|$)|عود",
+   "note": "'oud' is Dutch for 'old'; Commons search is noisy."
+  },
+  {
+   "id": "ney",
+   "display": "ney",
+   "group": "middle_east",
+   "role": "target",
+   "family": "wind",
+   "cousin": "flute",
+   "audioset_tier": 3,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Flute",
+    "Wind instrument, woodwind instrument"
+   ],
+   "freesound_queries": [
+    "ney flute",
+    "nay flute",
+    "ney turkish",
+    "ney arabic"
+   ],
+   "commons_queries": [
+    "ney flute",
+    "nay flute"
+   ],
+   "commons_categories": [
+    "Category:Ney"
+   ],
+   "commons_title_regex": "(^|[^a-z])(ney|nay)([^a-z]|$)",
+   "note": "Include Turkish and Arab ney; exclude Persian ney only if the label guide says so."
+  },
+  {
+   "id": "qanun",
+   "display": "qanun",
+   "group": "middle_east",
+   "role": "target",
+   "family": "zither",
+   "cousin": "acoustic_guitar",
+   "audioset_tier": 2,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Zither",
+    "Plucked string instrument"
+   ],
+   "freesound_queries": [
+    "qanun",
+    "kanun instrument",
+    "qanoun"
+   ],
+   "commons_queries": [
+    "qanun",
+    "kanun"
+   ],
+   "commons_categories": [
+    "Category:Kanun (instrument)"
+   ],
+   "commons_title_regex": "qanun|kanun|qanoun|kanoun",
+   "note": "Cousin is a proposal. Confirm."
+  },
+  {
+   "id": "darbuka",
+   "display": "darbuka",
+   "group": "middle_east",
+   "role": "target",
+   "family": "drum",
+   "cousin": "snare_drum",
+   "audioset_tier": 2,
+   "audioset_exact": null,
+   "audioset_family": [
+    "Drum",
+    "Percussion"
+   ],
+   "freesound_queries": [
+    "darbuka",
+    "darbouka",
+    "doumbek",
+    "dumbek",
+    "goblet drum",
+    "derbake"
+   ],
+   "commons_queries": [
+    "darbuka",
+    "darbouka",
+    "doumbek"
+   ],
+   "commons_categories": [
+    "Category:Darbuka"
+   ],
+   "commons_title_regex": "darbu|darbo|doumbe|dumbe|goblet|derbak",
+   "note": "Exclude Persian tombak."
+  },
+  {
+   "id": "sitar",
+   "display": "sitar",
+   "group": "control",
+   "role": "control",
+   "family": "plucked",
+   "cousin": "acoustic_guitar",
+   "audioset_tier": 1,
+   "audioset_exact": "Sitar",
+   "audioset_family": [
+    "Plucked string instrument"
+   ],
+   "freesound_queries": [
+    "sitar"
+   ],
+   "commons_queries": [
+    "sitar"
+   ],
+   "commons_categories": [
+    "Category:Sitar"
+   ],
+   "commons_title_regex": "sitar",
+   "note": ""
+  },
+  {
+   "id": "tabla",
+   "display": "tabla",
+   "group": "control",
+   "role": "control",
+   "family": "drum",
+   "cousin": "snare_drum",
+   "audioset_tier": 1,
+   "audioset_exact": "Tabla",
+   "audioset_family": [
+    "Drum",
+    "Percussion"
+   ],
+   "freesound_queries": [
+    "tabla"
+   ],
+   "commons_queries": [
+    "tabla"
+   ],
+   "commons_categories": [
+    "Category:Tabla"
+   ],
+   "commons_title_regex": "tabla",
+   "note": ""
+  },
+  {
+   "id": "violin",
+   "display": "violin",
+   "group": "western",
+   "role": "cousin",
+   "family": "bowed",
+   "cousin": null,
+   "audioset_tier": 1,
+   "audioset_exact": "Violin, fiddle",
+   "audioset_family": [
+    "Bowed string instrument"
+   ],
+   "freesound_queries": [
+    "violin solo",
+    "solo violin"
+   ],
+   "commons_queries": [],
+   "commons_categories": [],
+   "commons_title_regex": "violin",
+   "note": ""
+  },
+  {
+   "id": "flute",
+   "display": "flute",
+   "group": "western",
+   "role": "cousin",
+   "family": "wind",
+   "cousin": null,
+   "audioset_tier": 1,
+   "audioset_exact": "Flute",
+   "audioset_family": [
+    "Flute",
+    "Wind instrument, woodwind instrument"
+   ],
+   "freesound_queries": [
+    "flute solo",
+    "concert flute"
+   ],
+   "commons_queries": [],
+   "commons_categories": [],
+   "commons_title_regex": "flute",
+   "note": ""
+  },
+  {
+   "id": "acoustic_guitar",
+   "display": "acoustic guitar",
+   "group": "western",
+   "role": "cousin",
+   "family": "plucked",
+   "cousin": null,
+   "audioset_tier": 1,
+   "audioset_exact": "Acoustic guitar",
+   "audioset_family": [
+    "Plucked string instrument",
+    "Guitar"
+   ],
+   "freesound_queries": [
+    "acoustic guitar solo",
+    "fingerstyle acoustic guitar"
+   ],
+   "commons_queries": [],
+   "commons_categories": [],
+   "commons_title_regex": "guitar",
+   "note": ""
+  },
+  {
+   "id": "snare_drum",
+   "display": "snare drum",
+   "group": "western",
+   "role": "cousin",
+   "family": "drum",
+   "cousin": null,
+   "audioset_tier": 1,
+   "audioset_exact": "Snare drum",
+   "audioset_family": [
+    "Drum",
+    "Percussion"
+   ],
+   "freesound_queries": [
+    "snare drum solo",
+    "snare drum"
+   ],
+   "commons_queries": [],
+   "commons_categories": [],
+   "commons_title_regex": "snare",
+   "note": "Proposed Western drum cousin. Confirm."
+  }
+ ]
+}

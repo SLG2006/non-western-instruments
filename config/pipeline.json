@@ -1,0 +1,14 @@
+{
+  "clip_seconds": 10.0,
+  "sample_rate": 32000,
+  "min_source_seconds": 5.0,
+  "max_source_seconds": 900.0,
+  "max_clips_per_source": 3,
+  "max_clips_per_group": 12,
+  "max_clips_per_instrument": 60,
+  "min_clips_per_instrument": 20,
+  "target_clips_per_instrument": 40,
+  "silence_floor_dbfs": -45.0,
+  "relabel_fraction": 0.10,
+  "seed": 13
+}

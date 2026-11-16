@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.part
+data/raw/
+data/clips/
+data/cache/
+data/features/
+checkpoints/
+.claude/.gate_state.json
+.claude/settings.local.json
+.DS_Store
