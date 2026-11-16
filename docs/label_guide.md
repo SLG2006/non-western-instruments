@@ -28,6 +28,14 @@ Label by ear. The label is the instrument you hear, whatever the uploader called
 | 17 | acoustic_guitar | western | plucked | acoustic guitar solo, fingerstyle acoustic guitar | TODO |  |
 | 18 | snare_drum | western | drum | snare drum solo, snare drum | TODO | Proposed Western drum cousin. Confirm. |
 
+## Clip window rule (decided 2026-11-15; replaces "first 10 s after the first sustained onset")
+- Each recording is decoded to mono at its source sample rate. 10 s windows are scored by RMS level in dBFS, stepping 5 s at a time.
+- Windows are ranked loudest first; a window that overlaps an already chosen one is skipped; windows below -45 dBFS are never used; at most 3 per recording.
+- Pass 1 takes the loudest window of every approved recording, walking uploaders round-robin. Later passes take the 2nd and 3rd loudest, until the instrument reaches 60 clips or 12 per uploader. This spends the clip budget on more uploaders first.
+- Recordings of 5 to 10 s give one clip, padded with silence to 10 s; `content_s` in the manifest gives the real length.
+- Reason: the rule is deterministic and lands on playing rather than on a quiet start. Risk: it can pick a loud non-musical event; listening catches that (reject x).
+- Clip ids end in the window rank (`_0` = loudest). The first cut (2026-11-15, 32 kHz, up to 3 clips per recording before moving on) was set aside in `data/clips_v0/` and is not used.
+
 ## Decisions to record here
 - **erhu vs. other huqin (decided 2026-11-15):** exclude jinghu, gaohu, zhonghu and banhu. Reason: they share erhu's construction but differ in register and timbre (jinghu and gaohu are much higher; banhu has a wooden soundboard), so folding them in widens the class beyond one instrument and makes the erhu vs. violin comparison noisier. Metadata mentions of other huqin do not reject a clip on their own; the label is decided by ear.
 - **Ceremonial and consent context (decided 2026-11-15):** reject recordings of funerals and other rites whose participants could not reasonably have agreed to dataset use (first case: fs:453003, Taoist funeral, Bangkok). Recordings that only mention a temple as the venue are labeled normally, unless what you hear suggests a rite is in progress.

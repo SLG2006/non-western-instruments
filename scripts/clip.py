@@ -3,10 +3,12 @@
 
   python3 scripts/clip.py --instrument erhu     # or 'all'
 
-For each instrument it walks source groups round-robin (so one uploader cannot
-dominate), downloads each recording once into data/raw/ (never modified
-afterwards), decodes to mono WAV, and keeps up to N non-overlapping windows with
-the highest energy. Recordings between the minimum length and 10 s are padded
+For each instrument it makes up to max_clips_per_source passes over the approved
+recordings, walking source groups round-robin each time. Pass 1 takes the loudest
+window of every recording, pass 2 the second loudest, and so on, so the clip cap
+is spent on more uploaders before more clips per recording. Each recording is
+downloaded once into data/raw/ (never modified afterwards) and decoded to mono
+WAV at the source sample rate unless config sets sample_rate. Recordings between the minimum length and 10 s are padded
 with silence; content_s records the real audio length. Needs ffmpeg and numpy.
 """
 import argparse, hashlib, subprocess, sys, tempfile, wave
@@ -47,7 +49,7 @@ def ffmpeg(*args):
 
 
 def pick_windows(samples, sr, clip_s, max_n, floor_db):
-    """Start times (s) of up to max_n non-overlapping windows, loudest first."""
+    """Start times (s) of up to max_n non-overlapping windows, ranked loudest first."""
     import numpy as np
     n, win, hop = len(samples), int(clip_s * sr), int(clip_s * sr / 2)
     if n <= win:
@@ -62,34 +64,42 @@ def pick_windows(samples, sr, clip_s, max_n, floor_db):
             break
         if all(abs(starts[i] - s) >= win for s in chosen):
             chosen.append(int(starts[i]))
-    return [s / sr for s in sorted(chosen)]
+    return [s / sr for s in chosen]
 
 
-def cut(row, pc, tmpdir):
-    """Return manifest rows for one approved recording (files written to data/clips/)."""
+def decode(row, pc, tmpdir):
+    """Decode one recording to mono 16-bit WAV. Returns (path, samples, sample_rate)."""
     import numpy as np
-    sr, clip_s = pc["sample_rate"], pc["clip_seconds"]
     full = Path(tmpdir) / "full.wav"
-    ffmpeg("-i", str(download(row)), "-ac", "1", "-ar", str(sr), "-c:a", "pcm_s16le", str(full))
+    rate = ["-ar", str(pc["sample_rate"])] if pc.get("sample_rate") else []  # null: keep the source rate
+    ffmpeg("-i", str(download(row)), "-ac", "1", *rate, "-c:a", "pcm_s16le", str(full))
     with wave.open(str(full), "rb") as wf:
+        sr = wf.getframerate()
         samples = np.frombuffer(wf.readframes(wf.getnframes()), dtype=np.int16)
-    dur = len(samples) / sr
+    return full, samples, sr
+
+
+def cut_window(row, pc, tmpdir, rank):
+    """Cut the rank-th loudest window (0 = loudest). Returns a manifest row, or None if there is none."""
+    full, samples, sr = decode(row, pc, tmpdir)
+    clip_s, dur = pc["clip_seconds"], len(samples) / sr
     if dur < pc["min_source_seconds"]:
-        return []
-    out = []
+        return None
+    starts = pick_windows(samples, sr, clip_s, pc["max_clips_per_source"], pc["silence_floor_dbfs"])
+    if rank >= len(starts):
+        return None
+    start = starts[rank]
     stem = f"{row['instrument']}_{row['candidate_id'].replace(':', '')}"
-    for k, start in enumerate(pick_windows(samples, sr, clip_s, pc["max_clips_per_source"], pc["silence_floor_dbfs"])):
-        rel = Path("data") / "clips" / row["instrument"] / f"{stem}_{k}.wav"
-        dst = C.root() / rel
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        ffmpeg("-ss", f"{start:.3f}", "-i", str(full), "-af", "apad", "-t", f"{clip_s}",
-               "-ac", "1", "-ar", str(sr), "-c:a", "pcm_s16le", "-bitexact", str(dst))
-        out.append({"clip_id": f"{stem}_{k}", "candidate_id": row["candidate_id"], "instrument": row["instrument"],
-                    "source_group": row["source_group"], "license_code": row["license_code"],
-                    "path": rel.as_posix(), "start_s": f"{start:.3f}", "duration_s": f"{clip_s:.1f}",
-                    "content_s": f"{min(clip_s, dur - start):.2f}", "sample_rate": str(sr),
-                    "sha256": hashlib.sha256(dst.read_bytes()).hexdigest()})
-    return out
+    rel = Path("data") / "clips" / row["instrument"] / f"{stem}_{rank}.wav"
+    dst = C.root() / rel
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    ffmpeg("-ss", f"{start:.3f}", "-i", str(full), "-af", "apad", "-t", f"{clip_s}",
+           "-ac", "1", "-ar", str(sr), "-c:a", "pcm_s16le", "-bitexact", str(dst))
+    return {"clip_id": f"{stem}_{rank}", "candidate_id": row["candidate_id"], "instrument": row["instrument"],
+            "source_group": row["source_group"], "license_code": row["license_code"],
+            "path": rel.as_posix(), "start_s": f"{start:.3f}", "duration_s": f"{clip_s:.1f}",
+            "content_s": f"{min(clip_s, dur - start):.2f}", "sample_rate": str(sr),
+            "sha256": hashlib.sha256(dst.read_bytes()).hexdigest()}
 
 
 def round_robin(rows):
@@ -109,40 +119,42 @@ def main(argv=None):
     a = ap.parse_args(argv)
     pc = C.cfg("pipeline")
     manifest = C.read_csv(C.p("clips"))
-    done = {r["candidate_id"] for r in manifest}
     shas = {r["sha256"] for r in manifest}
     approved = C.read_csv(C.p("approved"))
     ids = sorted({r["instrument"] for r in approved}) if a.instrument == "all" else [a.instrument]
     for ins in ids:
         n = sum(r["instrument"] == ins for r in manifest)
         per_group = Counter(r["source_group"] for r in manifest if r["instrument"] == ins)
-        failed = 0
-        for row in round_robin([r for r in approved if r["instrument"] == ins and r["candidate_id"] not in done]):
-            if n >= pc["max_clips_per_instrument"]:
-                break
-            room = pc["max_clips_per_group"] - per_group[row["source_group"]]
-            if room <= 0:
-                continue
-            try:
-                with tempfile.TemporaryDirectory() as td:
-                    new = cut(row, pc, td)
-            except Exception as e:  # one bad file must not stop the batch
-                failed += 1
-                print(f"  skip {row['candidate_id']}: {type(e).__name__}: {e}")
-                continue
-            for c in new[:room]:
+        have = Counter(r["candidate_id"] for r in manifest if r["instrument"] == ins)
+        rows = [r for r in approved if r["instrument"] == ins]
+        failed = set()
+        for rank in range(pc["max_clips_per_source"]):  # pass 1 = one clip per recording, then the next loudest
+            for row in round_robin(rows):
+                cid = row["candidate_id"]
+                if n >= pc["max_clips_per_instrument"]:
+                    break
+                if have[cid] != rank or cid in failed or per_group[row["source_group"]] >= pc["max_clips_per_group"]:
+                    continue
+                try:
+                    with tempfile.TemporaryDirectory() as td:
+                        c = cut_window(row, pc, td, rank)
+                except Exception as e:  # one bad file must not stop the batch
+                    failed.add(cid)
+                    print(f"  skip {cid}: {type(e).__name__}: {e}")
+                    continue
+                if c is None:
+                    continue
                 if c["sha256"] in shas:
                     (C.root() / c["path"]).unlink(missing_ok=True)
                     continue
                 shas.add(c["sha256"])
                 manifest.append(c)
+                have[cid] += 1
                 per_group[row["source_group"]] += 1
                 n += 1
-            for c in new[room:]:
-                (C.root() / c["path"]).unlink(missing_ok=True)
-            C.write_csv(C.p("clips"), manifest, C.schema("clips"))  # checkpoint after every recording
-        print(f"{ins}: {n} clips from {len(per_group)} source groups ({failed} downloads/decodes failed)")
-
+                C.write_csv(C.p("clips"), manifest, C.schema("clips"))  # checkpoint after every clip
+        print(f"{ins}: {n} clips from {len(per_group)} source groups and {len(have)} recordings "
+              f"({len(failed)} downloads/decodes failed)")
 
 if __name__ == "__main__":
     main()
