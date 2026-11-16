@@ -11,7 +11,7 @@ downloaded once into data/raw/ (never modified afterwards) and decoded to mono
 WAV at the source sample rate unless config sets sample_rate. Recordings between the minimum length and 10 s are padded
 with silence; content_s records the real audio length. Needs ffmpeg and numpy.
 """
-import argparse, hashlib, subprocess, sys, tempfile, wave
+import argparse, hashlib, os, subprocess, sys, tempfile, wave
 from collections import Counter, defaultdict
 from pathlib import Path
 from urllib.parse import urlparse
@@ -35,7 +35,7 @@ def download(row):
     if host not in DOWNLOAD_HOSTS[row["source"]]:
         raise RuntimeError(f"refusing to download from {host}")
     dst.parent.mkdir(parents=True, exist_ok=True)
-    req = Request(row["download_url"], headers={"User-Agent": "nonwestern-instruments-research/0.1 (OU NLP Lab)"})
+    req = Request(row["download_url"], headers={"User-Agent": f"nonwestern-instruments-research/0.1 (OU NLP Lab; {os.environ.get('NWI_CONTACT', 'contact not set')})"})
     tmp = dst.with_suffix(dst.suffix + ".part")
     with urlopen(req, timeout=120) as r, open(tmp, "wb") as f:
         while chunk := r.read(1 << 16):
@@ -117,6 +117,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--instrument", required=True)
     a = ap.parse_args(argv)
+    C.load_env()  # NWI_CONTACT for the User-Agent
     pc = C.cfg("pipeline")
     manifest = C.read_csv(C.p("clips"))
     shas = {r["sha256"] for r in manifest}
