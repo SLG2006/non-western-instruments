@@ -1,6 +1,6 @@
 {
-  "candidates": ["candidate_id","source","source_url","title","uploader","license_raw","license_code","duration_s","instrument","query","tags","description","download_url","retrieved_at"],
-  "approved": ["candidate_id","source","source_url","title","uploader","source_group","license_code","instrument","duration_s","download_url","decided_by"],
+  "candidates": ["candidate_id","source","source_url","title","uploader","license_raw","license_code","duration_s","instrument","query","tags","description","download_url","retrieved_at","gen_ai_preference"],
+  "approved": ["candidate_id","source","source_url","title","uploader","source_group","license_code","instrument","duration_s","download_url","decided_by","gen_ai_preference"],
   "flags": ["candidate_id","instrument","source_url","title","uploader","license_code","reason"],
   "rejected": ["candidate_id","instrument","reason"],
   "human_decisions": ["candidate_id","decision","note"],
