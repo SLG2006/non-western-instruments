@@ -1,4 +1,64 @@
 candidate_id,instrument,reason
+fs:223720,acoustic_guitar,tag loop
+fs:223721,acoustic_guitar,tag loop
+fs:223722,acoustic_guitar,tag loop
+fs:223723,acoustic_guitar,tag loop
+fs:223725,acoustic_guitar,tag loop
+fs:274283,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:39086,acoustic_guitar,tag loop
+fs:39087,acoustic_guitar,tag loop
+fs:39088,acoustic_guitar,tag loop
+fs:429538,acoustic_guitar,tag loop
+fs:466478,acoustic_guitar,tag loop
+fs:511819,acoustic_guitar,tag loop
+fs:516086,acoustic_guitar,tag loops
+fs:517559,acoustic_guitar,tag loop
+fs:517564,acoustic_guitar,tag loop
+fs:53274,acoustic_guitar,tag loops
+fs:53277,acoustic_guitar,tag loops
+fs:608079,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:657751,acoustic_guitar,"tag loop,loopable"
+fs:658852,acoustic_guitar,tag loop
+fs:660164,acoustic_guitar,tag loop
+fs:800553,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800554,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800558,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800559,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800560,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800561,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800563,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800565,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800584,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800588,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:800589,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:82389,acoustic_guitar,tag loop
+fs:94564,acoustic_guitar,uploader gen_ai_preference no-gen-ai
+fs:99187,acoustic_guitar,license sampling+
+fs:429050,dizi,tag loop
+fs:429051,dizi,tag loop
+fs:429052,dizi,tag loop
+fs:429053,dizi,tag loop
+fs:429054,dizi,tag loop
+fs:429055,dizi,tag loop
+fs:429056,dizi,tag loop
+fs:429057,dizi,tag loop
+fs:429058,dizi,tag loop
+fs:429059,dizi,tag loop
+fs:429060,dizi,tag loop
+fs:429061,dizi,tag loop
+fs:429062,dizi,tag loop
+fs:429063,dizi,tag loop
+fs:429064,dizi,tag loop
+fs:429065,dizi,tag loop
+fs:429066,dizi,tag loop
+fs:429847,dizi,tag loop
+fs:429849,dizi,tag loop
+fs:429852,dizi,tag loop
+fs:429853,dizi,tag loop
+fs:429854,dizi,tag loop
+fs:429856,dizi,tag loop
+fs:429866,dizi,tag loop
+fs:464010,dizi,tag loop
 fs:23895,erhu,license sampling+
 fs:23903,erhu,license sampling+
 fs:23904,erhu,license sampling+
@@ -12,13 +72,404 @@ fs:23931,erhu,license sampling+
 fs:23935,erhu,license sampling+
 fs:23937,erhu,license sampling+
 fs:23938,erhu,license sampling+
-fs:399810,erhu,uploader gen_ai_preference no-gen-ai
+fs:399810,erhu,tag loop
 fs:453003,erhu,human decision
+fs:489554,erhu,tag loop
+fs:519176,erhu,tag loop
+fs:554614,erhu,tag loop
+fs:565196,erhu,"tag loop,loops"
+fs:754128,erhu,already listed under dizi
+fs:754129,erhu,already listed under dizi
 wc:13251997,erhu,human decision
 wc:13252093,erhu,human decision
 wc:13252113,erhu,human decision
 wc:13252127,erhu,human decision
+fs:162092,flute,already listed under dizi
+fs:162093,flute,already listed under dizi
+fs:162094,flute,already listed under dizi
+fs:162095,flute,already listed under dizi
+fs:339341,flute,already listed under dizi
+fs:339357,flute,already listed under dizi
+fs:427849,flute,already listed under dizi
+fs:429050,flute,tag loop
+fs:429051,flute,tag loop
+fs:429052,flute,tag loop
+fs:429053,flute,tag loop
+fs:429054,flute,tag loop
+fs:429055,flute,tag loop
+fs:429056,flute,tag loop
+fs:429057,flute,tag loop
+fs:429058,flute,tag loop
+fs:429059,flute,tag loop
+fs:429060,flute,tag loop
+fs:429061,flute,tag loop
+fs:429062,flute,tag loop
+fs:429063,flute,tag loop
+fs:429064,flute,tag loop
+fs:429065,flute,tag loop
+fs:429066,flute,tag loop
+fs:429847,flute,tag loop
+fs:429849,flute,tag loop
+fs:429852,flute,tag loop
+fs:429853,flute,tag loop
+fs:429854,flute,tag loop
+fs:429856,flute,tag loop
+fs:429866,flute,tag loop
+fs:431287,flute,tag loop
+fs:431288,flute,tag loop
+fs:431289,flute,tag loop
+fs:591096,flute,tag loop
+fs:591100,flute,tag loop
+fs:814710,flute,uploader gen_ai_preference no-gen-ai
+fs:816095,flute,uploader gen_ai_preference no-gen-ai
+fs:865576,flute,tag loop
+fs:440815,ney,tag loop
+fs:440816,ney,tag loop
+fs:440817,ney,tag loop
+fs:162033,pipa,already listed under dizi
+fs:162034,pipa,already listed under dizi
+fs:162036,pipa,already listed under dizi
+fs:162113,pipa,already listed under erhu
+fs:725404,pipa,already listed under dizi
+fs:725442,pipa,already listed under dizi
+fs:725585,pipa,already listed under dizi
+fs:725829,pipa,already listed under dizi
+fs:754128,pipa,already listed under dizi
+fs:754129,pipa,already listed under dizi
+fs:415810,quena,already listed under dizi
+fs:415812,quena,already listed under dizi
+fs:416512,quena,already listed under dizi
+fs:431387,quena,already listed under flute
+fs:463714,quena,tag loop
+fs:463716,quena,tag loop
+fs:464010,quena,tag loop
+fs:469513,quena,tag loop
+fs:469514,quena,tag loop
+fs:520603,quena,already listed under flute
+fs:569393,quena,tag loop
+fs:454785,siku,already listed under flute
+fs:454786,siku,already listed under flute
+fs:454787,siku,already listed under flute
+fs:463714,siku,tag loop
+fs:474796,siku,tag loop
+fs:474797,siku,tag loop
+wc:1175858,siku,human decision
+wc:124653749,siku,human decision
+wc:169272145,siku,human decision
+wc:169431435,siku,human decision
+wc:169431436,siku,human decision
+wc:169431437,siku,human decision
+wc:169431438,siku,human decision
+wc:169431441,siku,human decision
+wc:169431442,siku,human decision
+wc:169431446,siku,human decision
+wc:169431450,siku,human decision
+wc:169431451,siku,human decision
+wc:169431458,siku,human decision
+wc:169431459,siku,human decision
+wc:169431460,siku,human decision
+wc:169431468,siku,human decision
+wc:169431469,siku,human decision
+wc:169431470,siku,human decision
+wc:169449143,siku,human decision
+wc:169449144,siku,human decision
+wc:169449145,siku,human decision
+wc:169449149,siku,human decision
+wc:169449150,siku,human decision
+wc:169449151,siku,human decision
+wc:169449154,siku,human decision
+wc:169449156,siku,human decision
+wc:169449161,siku,human decision
+wc:169449162,siku,human decision
+wc:169449163,siku,human decision
+wc:169484075,siku,human decision
+wc:169484076,siku,human decision
+wc:169484077,siku,human decision
+wc:169484083,siku,human decision
+wc:169484088,siku,human decision
+wc:169484096,siku,human decision
+wc:169484098,siku,human decision
+wc:169484101,siku,human decision
+wc:169484102,siku,human decision
+wc:169484103,siku,human decision
+wc:193198426,siku,human decision
+fs:121068,sitar,"tag loop,loops"
+fs:125980,sitar,already listed under flute
+fs:14421,sitar,license sampling+
+fs:202501,sitar,tag loop
+fs:20318,sitar,license sampling+
+fs:220221,sitar,tag loop
+fs:380071,sitar,tag loop
+fs:38099,sitar,tag loops
+fs:41352,sitar,license sampling+
+fs:434351,sitar,tag loop
+fs:435531,sitar,tag loop
+fs:514801,sitar,tag loop
+fs:514802,sitar,tag loop
+fs:514803,sitar,tag loop
+fs:514804,sitar,tag loop
+fs:514805,sitar,tag loop
+fs:514806,sitar,tag loop
+fs:514807,sitar,tag loop
+fs:514808,sitar,tag loop
+fs:514809,sitar,tag loop
+fs:514810,sitar,tag loop
+fs:558137,sitar,tag loop
+fs:577590,sitar,uploader gen_ai_preference no-gen-ai
+fs:724812,sitar,tag loop
+fs:724816,sitar,"tag loop,loopable"
+fs:724860,sitar,tag loop
+fs:724861,sitar,tag loop
+fs:733316,sitar,tag loop
+fs:754128,sitar,already listed under dizi
+fs:754129,sitar,already listed under dizi
+fs:754604,sitar,tag loop
+fs:860514,sitar,tag loop
+fs:89184,sitar,uploader gen_ai_preference no-gen-ai
+fs:101274,snare_drum,tag loop
+fs:108416,snare_drum,license sampling+
+fs:173855,snare_drum,"tag loop,loops"
+fs:194252,snare_drum,tag loop
+fs:205805,snare_drum,tag loop
+fs:205806,snare_drum,tag loop
+fs:210447,snare_drum,"tag drum-loop,loop"
+fs:233635,snare_drum,tag loop
+fs:347721,snare_drum,tag loop
+fs:38416,snare_drum,license sampling+
+fs:38417,snare_drum,license sampling+
+fs:385676,snare_drum,tag loop
+fs:388842,snare_drum,"tag drum-loop,loop"
+fs:413243,snare_drum,"tag drum-loop,loop"
+fs:418742,snare_drum,"tag drum-loop,loop"
+fs:418744,snare_drum,"tag drum-loop,loop"
+fs:418745,snare_drum,"tag drum-loop,loop"
+fs:418746,snare_drum,"tag drum-loop,loop"
+fs:418750,snare_drum,"tag drum-loop,loop"
+fs:418752,snare_drum,"tag drum-loop,loop"
+fs:420264,snare_drum,tag loop
+fs:420265,snare_drum,tag loop
+fs:420266,snare_drum,tag loop
+fs:420267,snare_drum,tag loop
+fs:420268,snare_drum,tag loop
+fs:420269,snare_drum,tag loop
+fs:420270,snare_drum,tag loop
+fs:420271,snare_drum,tag loop
+fs:420272,snare_drum,tag loop
+fs:420273,snare_drum,tag loop
+fs:420274,snare_drum,tag loop
+fs:420275,snare_drum,tag loop
+fs:420276,snare_drum,tag loop
+fs:420277,snare_drum,tag loop
+fs:420278,snare_drum,tag loop
+fs:420279,snare_drum,tag loop
+fs:420280,snare_drum,tag loop
+fs:420281,snare_drum,tag loop
+fs:420282,snare_drum,tag loop
+fs:420283,snare_drum,tag loop
+fs:420284,snare_drum,tag loop
+fs:420285,snare_drum,tag loop
+fs:420286,snare_drum,tag loop
+fs:420287,snare_drum,tag loop
+fs:420288,snare_drum,tag loop
+fs:420289,snare_drum,tag loop
+fs:420290,snare_drum,tag loop
+fs:420291,snare_drum,tag loop
+fs:420292,snare_drum,tag loop
+fs:423721,snare_drum,tag loop
+fs:423722,snare_drum,tag loop
+fs:423723,snare_drum,tag loop
+fs:423724,snare_drum,tag loop
+fs:423725,snare_drum,tag loop
+fs:423726,snare_drum,tag loop
+fs:423727,snare_drum,tag loop
+fs:423728,snare_drum,tag loop
+fs:423729,snare_drum,tag loop
+fs:423730,snare_drum,tag loop
+fs:423739,snare_drum,tag loop
+fs:423740,snare_drum,tag loop
+fs:423742,snare_drum,tag loop
+fs:423743,snare_drum,tag loop
+fs:423744,snare_drum,tag loop
+fs:423745,snare_drum,tag loop
+fs:431907,snare_drum,"tag drum-loop,loop"
+fs:432386,snare_drum,"tag drum-loop,loop"
+fs:432387,snare_drum,"tag drum-loop,loop"
+fs:432388,snare_drum,"tag drum-loop,loop"
+fs:432389,snare_drum,"tag drum-loop,loop"
+fs:432390,snare_drum,"tag drum-loop,loop"
+fs:432391,snare_drum,"tag drum-loop,loop"
+fs:432392,snare_drum,"tag drum-loop,loop"
+fs:432393,snare_drum,"tag drum-loop,loop"
+fs:432394,snare_drum,"tag drum-loop,loop"
+fs:432395,snare_drum,"tag drum-loop,loop"
+fs:432396,snare_drum,"tag drum-loop,loop"
+fs:432397,snare_drum,"tag drum-loop,loop"
+fs:432399,snare_drum,"tag drum-loop,loop"
+fs:432400,snare_drum,"tag drum-loop,loop"
+fs:432403,snare_drum,"tag drum-loop,loop"
+fs:432404,snare_drum,"tag drum-loop,loop"
+fs:488001,snare_drum,tag loop
+fs:506602,snare_drum,"tag drumloop,loop"
+fs:506679,snare_drum,"tag drumloop,loop"
+fs:506930,snare_drum,"tag drumloop,loop"
+fs:554147,snare_drum,"tag drum-loop,loop"
+fs:574479,snare_drum,tag loops
+fs:664039,snare_drum,tag loop
+fs:673466,snare_drum,tag loop
+fs:685316,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:702839,snare_drum,"tag drumloop,loop"
+fs:702840,snare_drum,"tag drumloop,loop"
+fs:708828,snare_drum,tag loop
+fs:708833,snare_drum,tag loop
+fs:708834,snare_drum,tag loop
+fs:727660,snare_drum,"tag drum-loop,loop"
+fs:751106,snare_drum,"tag drumloop,loop"
+fs:798396,snare_drum,tag loop
+fs:798778,snare_drum,tag loop
+fs:801446,snare_drum,tag loop
+fs:805463,snare_drum,tag loop
+fs:806098,snare_drum,tag loop
+fs:806924,snare_drum,tag loop
+fs:807472,snare_drum,tag loop
+fs:807954,snare_drum,tag loop
+fs:809678,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809694,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809696,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809781,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809782,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809783,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809784,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809786,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809789,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809790,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809791,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809792,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809794,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809795,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809796,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809798,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809799,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809801,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809802,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809803,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809804,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809805,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809807,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809814,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809815,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809816,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809817,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809818,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809822,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809825,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809828,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809830,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:809832,snare_drum,uploader gen_ai_preference no-gen-ai
+fs:813013,snare_drum,tag loop
+fs:813615,snare_drum,tag loop
+fs:814324,snare_drum,tag loop
+fs:815679,snare_drum,tag loop
+fs:815983,snare_drum,tag loop
+fs:815986,snare_drum,tag loop
+fs:816420,snare_drum,tag loop
+fs:816596,snare_drum,tag loop
+fs:816704,snare_drum,tag loop
+fs:816911,snare_drum,tag loop
+fs:817017,snare_drum,tag loop
+fs:819563,snare_drum,"tag drum-loop,loop"
+fs:819564,snare_drum,"tag drum-loop,loop"
+fs:819565,snare_drum,"tag drum-loop,loop"
+fs:819566,snare_drum,"tag drum-loop,loop"
+fs:819568,snare_drum,"tag drum-loop,loop"
+fs:819569,snare_drum,"tag drum-loop,loop"
+fs:819570,snare_drum,"tag drum-loop,loop"
+fs:819571,snare_drum,"tag drum-loop,loop"
+fs:819572,snare_drum,"tag drum-loop,loop"
+fs:824664,snare_drum,tag loop
+fs:825248,snare_drum,tag loop
+fs:125978,tabla,already listed under sitar
+fs:125979,tabla,already listed under sitar
+fs:125980,tabla,already listed under flute
+fs:126012,tabla,uploader gen_ai_preference no-gen-ai
+fs:147813,tabla,tag loop
+fs:147814,tabla,tag loop
+fs:151176,tabla,tag loop
+fs:178176,tabla,tag loop
+fs:20544,tabla,tag loop
+fs:242591,tabla,tag loop
+fs:330350,tabla,already listed under sitar
+fs:36183,tabla,license sampling+
+fs:36184,tabla,license sampling+
+fs:36185,tabla,license sampling+
+fs:36186,tabla,license sampling+
+fs:36187,tabla,license sampling+
+fs:36188,tabla,license sampling+
+fs:36189,tabla,license sampling+
+fs:36190,tabla,license sampling+
+fs:36191,tabla,license sampling+
+fs:36192,tabla,license sampling+
+fs:36193,tabla,license sampling+
+fs:36194,tabla,license sampling+
+fs:36195,tabla,license sampling+
+fs:36196,tabla,license sampling+
+fs:36197,tabla,license sampling+
+fs:36198,tabla,license sampling+
+fs:36199,tabla,license sampling+
+fs:36200,tabla,license sampling+
+fs:36201,tabla,license sampling+
+fs:36202,tabla,license sampling+
+fs:36203,tabla,license sampling+
+fs:36204,tabla,license sampling+
+fs:36205,tabla,license sampling+
+fs:36206,tabla,license sampling+
+fs:36207,tabla,license sampling+
+fs:36208,tabla,license sampling+
+fs:36209,tabla,license sampling+
+fs:36210,tabla,license sampling+
+fs:36211,tabla,license sampling+
+fs:36212,tabla,license sampling+
+fs:36213,tabla,license sampling+
+fs:36214,tabla,license sampling+
+fs:36215,tabla,license sampling+
+fs:36216,tabla,license sampling+
+fs:36217,tabla,license sampling+
+fs:36218,tabla,license sampling+
+fs:36219,tabla,license sampling+
+fs:36220,tabla,license sampling+
+fs:362789,tabla,tag drum-loop
+fs:396460,tabla,already listed under sitar
+fs:429538,tabla,tag loop
+fs:467333,tabla,tag loop
+fs:467334,tabla,tag loop
+fs:467335,tabla,tag loop
+fs:467336,tabla,tag loop
+fs:467337,tabla,tag loop
+fs:467338,tabla,tag loop
+fs:467339,tabla,tag loop
+fs:506117,tabla,tag loop
+fs:506118,tabla,tag loop
+fs:506119,tabla,tag loop
+fs:532294,tabla,already listed under sitar
+fs:580663,tabla,tag drum-loop
+fs:629750,tabla,"tag loop,loopable"
+fs:74706,tabla,tag loop
+fs:819801,tabla,"tag loop,loops"
+fs:854596,tabla,"tag drumloop,loop"
+fs:87312,tabla,"tag loop,loopable"
+fs:87313,tabla,"tag loop,loopable"
+fs:87314,tabla,"tag loop,loopable"
+fs:87318,tabla,tag loop
+fs:87319,tabla,tag loop
+fs:87320,tabla,tag loop
+wc:84701047,tabla,already listed under sitar
 fs:120106,violin,uploader gen_ai_preference no-gen-ai
 fs:371579,violin,already listed under erhu
 fs:372072,violin,already listed under erhu
+fs:516209,violin,tag loop
+fs:516443,violin,tag loop
+fs:518568,violin,tag loop
 fs:685582,violin,uploader gen_ai_preference no-gen-ai
+fs:723522,violin,already listed under flute
+fs:729385,violin,already listed under flute
+fs:865575,violin,"tag drum-loop,loop"
+fs:865576,violin,tag loop

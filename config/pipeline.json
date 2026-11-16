@@ -9,6 +9,13 @@
   "min_clips_per_instrument": 20,
   "target_clips_per_instrument": 40,
   "silence_floor_dbfs": -45.0,
-  "relabel_fraction": 0.10,
-  "seed": 13
+  "relabel_fraction": 0.1,
+  "seed": 13,
+  "reject_tags": [
+    "loop",
+    "loops",
+    "drum-loop",
+    "drumloop",
+    "loopable"
+  ]
 }
