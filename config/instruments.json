@@ -212,17 +212,27 @@
    "freesound_queries": [
     "bombo legüero",
     "bombo leguero",
-    "bombo andino"
+    "bombo andino",
+    {
+     "query": "bombo",
+     "filter": "tag:bombo"
+    },
+    "bombo argentino",
+    "bombo criollo",
+    "bombo chacarera",
+    "bombo folklore"
    ],
    "commons_queries": [
     "bombo legüero",
-    "bombo leguero"
+    "bombo leguero",
+    "bombo argentino",
+    "bombo andino"
    ],
    "commons_categories": [
     "Category:Bombo legüero"
    ],
    "commons_title_regex": "bombo",
-   "note": ""
+   "note": "Bare bombo searched only with tag:bombo (Spanish bombo also means a Western bass drum). Scope (legüero only, or also Andean/sikuri bombo) is set in the label guide; reject other bombos by ear if excluded."
   },
   {
    "id": "oud",

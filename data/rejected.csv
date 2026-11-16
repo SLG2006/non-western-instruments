@@ -35,6 +35,7 @@ fs:82389,acoustic_guitar,tag loop
 fs:94564,acoustic_guitar,uploader gen_ai_preference no-gen-ai
 fs:99187,acoustic_guitar,license sampling+
 fs:451314,bombo,tag loop
+fs:196357,charango,already listed under bombo
 fs:45658,charango,license sampling+
 fs:679468,charango,tag loop
 fs:111414,darbuka,tag loop
@@ -212,7 +213,7 @@ fs:690455,qanun,tag loop
 wc:136851319,qanun,license by-sa
 wc:64184198,qanun,license by-sa
 wc:64184234,qanun,license by-sa
-fs:196357,quena,already listed under charango
+fs:196357,quena,already listed under bombo
 fs:415810,quena,already listed under dizi
 fs:415812,quena,already listed under dizi
 fs:416512,quena,already listed under dizi
