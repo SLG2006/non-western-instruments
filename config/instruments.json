@@ -243,7 +243,11 @@
     "oud maqam",
     "oud instrument",
     "ud lute",
-    "عود"
+    "عود",
+    {
+     "query": "oud",
+     "filter": "tag:oud"
+    }
    ],
    "commons_queries": [
     "oud music",
