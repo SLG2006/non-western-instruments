@@ -63,9 +63,12 @@ def scout_freesound(inst, pc, now, pages=2):
         sys.exit("FREESOUND_API_KEY is not set. Put it in .env (see .env.example).")
     rows = []
     for q in inst["freesound_queries"]:
+        extra = ""
+        if isinstance(q, dict):  # {"query": "oud", "filter": "tag:oud"}: extra Freesound filter for one query
+            q, extra = q["query"], " " + q["filter"]
         for page in range(1, pages + 1):
             params = {"query": q, "page": page, "page_size": 150,
-                      "filter": f"duration:[{pc['min_source_seconds']} TO {pc['max_source_seconds']}]",
+                      "filter": f"duration:[{pc['min_source_seconds']} TO {pc['max_source_seconds']}]{extra}",
                       "fields": "id,name,username,license,duration,tags,description,previews,url,gen_ai_preference"}
             try:
                 data = get_json(FS_API + "?" + urlencode(params), {"Authorization": f"Token {key}"})

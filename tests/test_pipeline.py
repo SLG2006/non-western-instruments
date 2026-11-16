@@ -37,8 +37,18 @@ def test_full_pipeline_passes(built):
         assert {r["split"] for r in splits if r["instrument"] == ins} == {"train", "test"}
 
 
+def _sharealike_needs_human(proj):
+    """Test the needs_human mechanism with by-sa in needs_human, whatever the live policy is."""
+    f = proj / "config" / "licenses.json"
+    lic = json.loads(f.read_text())
+    lic["reject"] = [c for c in lic["reject"] if c != "by-sa"]
+    lic["needs_human"] = sorted(set(lic["needs_human"]) | {"by-sa"})
+    f.write_text(json.dumps(lic))
+
+
 def test_curate_license_rules(proj):
     import curate
+    _sharealike_needs_human(proj)
     rows = [cand(1), cand(2, lic="CC BY-SA 4.0"), cand(3, lic="CC BY-ND 4.0"), cand(4, lic="CC BY-SA 4.0"),
             cand(5, dur=2.0), cand(6, uploader=""), cand(7, lic="CC BY-SA 4.0")]
     write_candidates(proj, rows)
@@ -66,6 +76,7 @@ def test_gate_catches_unapproved_license(built):
 
 
 def test_gate_catches_sharealike_without_human(proj):
+    _sharealike_needs_human(proj)
     row = cand(9, lic="CC BY-SA 4.0")
     write_candidates(proj, [row])
     C.write_csv(C.p("approved"), [{**row, "source_group": "freesound:alice", "decided_by": "rule"}], C.schema("approved"))
@@ -195,4 +206,12 @@ def test_config_is_consistent():
         assert i["cousin"] is None or inst[i["cousin"]]["role"] == "cousin"
         assert i["freesound_queries"] and i["audioset_family"]
     lic = C.cfg("licenses")
-    assert not (set(lic["accept"]) & set(lic["reject"])) and "by-sa" in lic["needs_human"]
+    assert not (set(lic["accept"]) & set(lic["reject"])) and {"by-sa", "by-nc-sa"} <= set(lic["reject"])  # author's rule, 2026-11-15
+
+
+def test_live_policy_rejects_sharealike(proj):
+    import curate
+    write_candidates(proj, [cand(1, lic="CC BY-SA 4.0"), cand(2, lic="CC BY-NC-SA 4.0"), cand(3)])
+    curate.main()
+    assert {r["candidate_id"] for r in C.read_csv(C.p("rejected"))} == {"fs:1", "fs:2"}
+    assert not C.read_csv(C.p("flags"))

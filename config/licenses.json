@@ -1,6 +1,20 @@
 {
-  "_note": "HUMAN-ONLY FILE. Agents may not edit it. by-sa stays in needs_human until Dr. Cao decides; then move it to accept or reject.",
-  "accept": ["cc0", "pd", "by", "by-nc"],
-  "needs_human": ["by-sa", "by-nc-sa", "unknown", "other"],
-  "reject": ["by-nd", "by-nc-nd", "sampling+"]
+  "_note": "HUMAN-ONLY FILE. Agents may not edit it. ShareAlike licenses (by-sa, by-nc-sa) rejected by the author on 2026-11-15: they conflict with a CC BY-NC release.",
+  "accept": [
+    "cc0",
+    "pd",
+    "by",
+    "by-nc"
+  ],
+  "needs_human": [
+    "unknown",
+    "other"
+  ],
+  "reject": [
+    "by-nd",
+    "by-nc-nd",
+    "sampling+",
+    "by-sa",
+    "by-nc-sa"
+  ]
 }

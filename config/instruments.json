@@ -237,7 +237,11 @@
     "Plucked string instrument"
    ],
    "freesound_queries": [
-    "oud",
+    "oud lute",
+    "oud solo",
+    "oud taqsim",
+    "oud maqam",
+    "oud instrument",
     "ud lute",
     "عود"
    ],
@@ -250,7 +254,7 @@
     "Category:Audio files of oud music"
    ],
    "commons_title_regex": "(^|[^a-z])oud([^a-z]|$)|عود",
-   "note": "'oud' is Dutch for 'old'; Commons search is noisy."
+   "note": "'oud' is Dutch for 'old' (place names like Oud-Beijerland); bare 'oud' query dropped on 2026-11-15, queries pair it with a music term."
   },
   {
    "id": "ney",
