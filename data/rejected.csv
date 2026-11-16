@@ -34,6 +34,39 @@ fs:800589,acoustic_guitar,uploader gen_ai_preference no-gen-ai
 fs:82389,acoustic_guitar,tag loop
 fs:94564,acoustic_guitar,uploader gen_ai_preference no-gen-ai
 fs:99187,acoustic_guitar,license sampling+
+fs:451314,bombo,tag loop
+fs:45658,charango,license sampling+
+fs:679468,charango,tag loop
+fs:111414,darbuka,tag loop
+fs:124418,darbuka,tag loop
+fs:124419,darbuka,tag loop
+fs:124420,darbuka,tag loop
+fs:16396,darbuka,tag loop
+fs:16397,darbuka,tag loop
+fs:176014,darbuka,tag loop
+fs:184830,darbuka,tag loop
+fs:271098,darbuka,tag loop
+fs:318582,darbuka,tag loops
+fs:320801,darbuka,tag loop
+fs:321434,darbuka,tag loop
+fs:337443,darbuka,tag loop
+fs:369208,darbuka,tag loop
+fs:426198,darbuka,tag loop
+fs:444012,darbuka,tag loop
+fs:452805,darbuka,tag loop
+fs:467333,darbuka,tag loop
+fs:467334,darbuka,tag loop
+fs:467335,darbuka,tag loop
+fs:467336,darbuka,tag loop
+fs:467337,darbuka,tag loop
+fs:467338,darbuka,tag loop
+fs:467339,darbuka,tag loop
+fs:538253,darbuka,tag loop
+fs:624888,darbuka,tag loop
+fs:691768,darbuka,"tag drum-loop,loop"
+fs:723716,darbuka,tag loop
+fs:803228,darbuka,tag drum-loop
+fs:853615,darbuka,tag loop
 fs:429050,dizi,tag loop
 fs:429051,dizi,tag loop
 fs:429052,dizi,tag loop
@@ -123,19 +156,59 @@ fs:591100,flute,tag loop
 fs:814710,flute,uploader gen_ai_preference no-gen-ai
 fs:816095,flute,uploader gen_ai_preference no-gen-ai
 fs:865576,flute,tag loop
+fs:222552,guzheng,tag loop
+fs:222655,guzheng,tag loop
+fs:545155,guzheng,tag loop
+fs:573972,guzheng,already listed under erhu
+fs:666269,guzheng,tag loop
+fs:725404,guzheng,already listed under dizi
+fs:725442,guzheng,already listed under dizi
+fs:725585,guzheng,already listed under dizi
+fs:725829,guzheng,already listed under dizi
+fs:754128,guzheng,already listed under dizi
+fs:754129,guzheng,already listed under dizi
+fs:830014,guzheng,tag loop
 fs:440815,ney,tag loop
 fs:440816,ney,tag loop
 fs:440817,ney,tag loop
+fs:128355,oud,tag loop
+fs:186702,oud,already listed under darbuka
+fs:186703,oud,already listed under darbuka
+fs:260873,oud,tag loop
+fs:440815,oud,tag loop
+fs:440816,oud,tag loop
+fs:440817,oud,tag loop
+fs:51829,oud,tag loop
+fs:545155,oud,tag loop
+fs:732051,oud,tag loop
+fs:802637,oud,"tag loop,loopable"
+fs:876855,oud,already listed under ney
+wc:6145134,oud,license by-sa
+wc:68284735,oud,license by-sa
+wc:68284737,oud,license by-sa
+wc:68284742,oud,license by-sa
+wc:68284744,oud,license by-sa
+wc:68284746,oud,license by-sa
+wc:68284755,oud,license by-sa
 fs:162033,pipa,already listed under dizi
 fs:162034,pipa,already listed under dizi
 fs:162036,pipa,already listed under dizi
 fs:162113,pipa,already listed under erhu
+fs:546978,pipa,already listed under guzheng
 fs:725404,pipa,already listed under dizi
 fs:725442,pipa,already listed under dizi
 fs:725585,pipa,already listed under dizi
 fs:725829,pipa,already listed under dizi
 fs:754128,pipa,already listed under dizi
 fs:754129,pipa,already listed under dizi
+wc:141577206,pipa,license by-sa
+wc:44671582,pipa,license by-sa
+fs:162197,qanun,already listed under oud
+fs:162198,qanun,already listed under oud
+fs:162200,qanun,already listed under oud
+fs:162204,qanun,already listed under oud
+fs:690455,qanun,tag loop
+fs:196357,quena,already listed under charango
 fs:415810,quena,already listed under dizi
 fs:415812,quena,already listed under dizi
 fs:416512,quena,already listed under dizi
@@ -216,6 +289,7 @@ fs:514809,sitar,tag loop
 fs:514810,sitar,tag loop
 fs:558137,sitar,tag loop
 fs:577590,sitar,uploader gen_ai_preference no-gen-ai
+fs:684358,sitar,already listed under darbuka
 fs:724812,sitar,tag loop
 fs:724816,sitar,"tag loop,loopable"
 fs:724860,sitar,tag loop
@@ -226,6 +300,13 @@ fs:754129,sitar,already listed under dizi
 fs:754604,sitar,tag loop
 fs:860514,sitar,tag loop
 fs:89184,sitar,uploader gen_ai_preference no-gen-ai
+wc:117313203,sitar,license by-sa
+wc:122856256,sitar,license by-sa
+wc:122856258,sitar,license by-sa
+wc:122856270,sitar,license by-sa
+wc:16872752,sitar,license by-sa
+wc:26776070,sitar,license by-sa
+wc:42521985,sitar,license by-sa
 fs:101274,snare_drum,tag loop
 fs:108416,snare_drum,license sampling+
 fs:173855,snare_drum,"tag loop,loops"
@@ -461,6 +542,14 @@ fs:87314,tabla,"tag loop,loopable"
 fs:87318,tabla,tag loop
 fs:87319,tabla,tag loop
 fs:87320,tabla,tag loop
+wc:158942154,tabla,license by-sa
+wc:42521985,tabla,license by-sa
+wc:43536414,tabla,license by-sa
+wc:44221256,tabla,license by-sa
+wc:44221268,tabla,license by-sa
+wc:44660279,tabla,license by-sa
+wc:44661208,tabla,license by-sa
+wc:45944195,tabla,license by-sa
 wc:84701047,tabla,already listed under sitar
 fs:120106,violin,uploader gen_ai_preference no-gen-ai
 fs:371579,violin,already listed under erhu
