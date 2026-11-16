@@ -1,6 +1,6 @@
 {
   "clip_seconds": 10.0,
-  "sample_rate": 32000,
+  "sample_rate": null,
   "min_source_seconds": 5.0,
   "max_source_seconds": 900.0,
   "max_clips_per_source": 3,

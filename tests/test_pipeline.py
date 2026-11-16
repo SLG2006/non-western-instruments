@@ -26,7 +26,8 @@ def test_full_pipeline_passes(built):
     clips = C.read_csv(C.p("clips"))
     assert len(clips) == 16  # 7 s and 12 s tones give one window each
     with wave.open(str(built / clips[0]["path"])) as w:
-        assert (w.getframerate(), w.getnchannels(), w.getnframes()) == (32000, 1, 320000)
+        sr = int(clips[0]["sample_rate"])  # sample_rate null in config: clips keep the source rate
+        assert sr == 44100 and (w.getframerate(), w.getnchannels(), w.getnframes()) == (sr, 1, 10 * sr)
     assert {c["content_s"] for c in clips} == {"7.00", "10.00"} or all(5 <= float(c["content_s"]) <= 10 for c in clips)
     splits = C.read_csv(C.p("splits"))
     sides = {}

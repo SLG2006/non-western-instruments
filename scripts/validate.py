@@ -177,7 +177,7 @@ def check_clips(rep):
         except (wave.Error, EOFError) as e:
             rep.err(w, f"not a readable WAV: {e}")
             continue
-        if sr != pc["sample_rate"] or str(sr) != r["sample_rate"]:
+        if (pc["sample_rate"] and sr != pc["sample_rate"]) or str(sr) != r["sample_rate"]:
             rep.err(w, f"sample rate {sr}, expected {pc['sample_rate']}")
         if ch != 1:
             rep.err(w, f"{ch} channels, expected mono")
