@@ -1,0 +1,12 @@
+{
+ "n_relabelled": 12,
+ "raw_agreement": 0.9166666666666666,
+ "cohens_kappa": 0.8695652173913044,
+ "disagreements": [
+  {
+   "clip_id": "erhu_fs65857_0",
+   "pass1": "erhu",
+   "pass2": "violin"
+  }
+ ]
+}
