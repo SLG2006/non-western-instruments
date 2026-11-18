@@ -1,10 +1,10 @@
 {
- "labelled_pass1": 456,
+ "labelled_pass1": 527,
  "total_clips": 806,
  "dropped": {
-  "not_solo": 24,
+  "not_solo": 26,
   "not_confident": 21,
-  "reject": 147,
+  "reject": 172,
   "unsure": 4
  },
  "usable": {
@@ -34,13 +34,13 @@
    "meets_minimum": true
   },
   "quena": {
-   "clips": 0,
-   "source_groups": 0,
+   "clips": 11,
+   "source_groups": 6,
    "meets_minimum": false
   },
   "siku": {
-   "clips": 0,
-   "source_groups": 0,
+   "clips": 8,
+   "source_groups": 6,
    "meets_minimum": false
   },
   "bombo": {
@@ -54,9 +54,9 @@
    "meets_minimum": false
   },
   "ney": {
-   "clips": 0,
-   "source_groups": 0,
-   "meets_minimum": false
+   "clips": 25,
+   "source_groups": 6,
+   "meets_minimum": true
   },
   "qanun": {
    "clips": 0,
