@@ -1,11 +1,11 @@
 {
- "labelled_pass1": 527,
+ "labelled_pass1": 605,
  "total_clips": 806,
  "dropped": {
-  "not_solo": 26,
+  "not_solo": 28,
   "not_confident": 21,
-  "reject": 172,
-  "unsure": 4
+  "reject": 204,
+  "unsure": 9
  },
  "usable": {
   "erhu": {
@@ -24,9 +24,9 @@
    "meets_minimum": true
   },
   "guzheng": {
-   "clips": 0,
-   "source_groups": 0,
-   "meets_minimum": false
+   "clips": 25,
+   "source_groups": 10,
+   "meets_minimum": true
   },
   "charango": {
    "clips": 30,
@@ -59,8 +59,8 @@
    "meets_minimum": true
   },
   "qanun": {
-   "clips": 0,
-   "source_groups": 0,
+   "clips": 14,
+   "source_groups": 5,
    "meets_minimum": false
   },
   "darbuka": {
