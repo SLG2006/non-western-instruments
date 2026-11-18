@@ -1,10 +1,10 @@
 {
- "labelled_pass1": 243,
+ "labelled_pass1": 336,
  "total_clips": 806,
  "dropped": {
-  "not_solo": 15,
+  "not_solo": 18,
   "not_confident": 20,
-  "reject": 95,
+  "reject": 107,
   "unsure": 4
  },
  "usable": {
@@ -29,9 +29,9 @@
    "meets_minimum": false
   },
   "charango": {
-   "clips": 0,
-   "source_groups": 0,
-   "meets_minimum": false
+   "clips": 30,
+   "source_groups": 9,
+   "meets_minimum": true
   },
   "quena": {
    "clips": 0,
@@ -89,9 +89,9 @@
    "meets_minimum": false
   },
   "acoustic_guitar": {
-   "clips": 0,
-   "source_groups": 0,
-   "meets_minimum": false
+   "clips": 48,
+   "source_groups": 17,
+   "meets_minimum": true
   },
   "snare_drum": {
    "clips": 0,
