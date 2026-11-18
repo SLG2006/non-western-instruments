@@ -1,11 +1,11 @@
 {
- "labelled_pass1": 120,
- "total_clips": 120,
+ "labelled_pass1": 243,
+ "total_clips": 806,
  "dropped": {
-  "not_solo": 9,
-  "not_confident": 10,
-  "reject": 28,
-  "unsure": 3
+  "not_solo": 15,
+  "not_confident": 20,
+  "reject": 95,
+  "unsure": 4
  },
  "usable": {
   "erhu": {
@@ -14,8 +14,8 @@
    "meets_minimum": true
   },
   "pipa": {
-   "clips": 0,
-   "source_groups": 0,
+   "clips": 7,
+   "source_groups": 3,
    "meets_minimum": false
   },
   "dizi": {
@@ -49,8 +49,8 @@
    "meets_minimum": false
   },
   "oud": {
-   "clips": 0,
-   "source_groups": 0,
+   "clips": 15,
+   "source_groups": 7,
    "meets_minimum": false
   },
   "ney": {
@@ -69,8 +69,8 @@
    "meets_minimum": false
   },
   "sitar": {
-   "clips": 0,
-   "source_groups": 0,
+   "clips": 17,
+   "source_groups": 17,
    "meets_minimum": false
   },
   "tabla": {
