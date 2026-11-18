@@ -1,10 +1,10 @@
 {
- "labelled_pass1": 336,
+ "labelled_pass1": 456,
  "total_clips": 806,
  "dropped": {
-  "not_solo": 18,
-  "not_confident": 20,
-  "reject": 107,
+  "not_solo": 24,
+  "not_confident": 21,
+  "reject": 147,
   "unsure": 4
  },
  "usable": {
@@ -19,9 +19,9 @@
    "meets_minimum": false
   },
   "dizi": {
-   "clips": 0,
-   "source_groups": 0,
-   "meets_minimum": false
+   "clips": 25,
+   "source_groups": 13,
+   "meets_minimum": true
   },
   "guzheng": {
    "clips": 0,
@@ -84,9 +84,9 @@
    "meets_minimum": true
   },
   "flute": {
-   "clips": 0,
-   "source_groups": 0,
-   "meets_minimum": false
+   "clips": 48,
+   "source_groups": 13,
+   "meets_minimum": true
   },
   "acoustic_guitar": {
    "clips": 48,
