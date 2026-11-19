@@ -198,6 +198,15 @@ def split_counts(splits):
             for c, v in sorted(out.items())}
 
 
+def split_composition(splits, cut_instrument):
+    """Per class and split: clip counts by the instrument the clip was cut under (its search query).
+    A class whose train and test sides come from different cut instruments has a composition shift."""
+    out = defaultdict(lambda: defaultdict(Counter))
+    for r in splits:
+        out[r["instrument"]][r["split"]][cut_instrument.get(r["clip_id"], "?")] += 1
+    return {c: {s: dict(sorted(v.items())) for s, v in sorted(d.items())} for c, d in sorted(out.items())}
+
+
 def leakage_flags(probes):
     flags = []
     for name, by_k in probes.items():
@@ -281,6 +290,8 @@ def run(model, features=None, dry_run=False, allow_dirty=False, impl="sklearn"):
     emb = dict(zip(ids, X))
     seed = C.cfg("pipeline")["seed"]
     metrics = evaluate(splits, emb, seed, impl=impl, main_k=MAIN_K)
+    cut = {r["clip_id"]: r["instrument"] for r in C.read_csv(C.p("clips"))}
+    metrics["split_composition_by_cut_instrument"] = split_composition(splits, cut)
     for f in metrics["leakage_flags"]:
         print("LEAKAGE CHECK:", f)
     print(render(metrics))

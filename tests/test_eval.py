@@ -386,6 +386,14 @@ def test_probe_fixed_main_class_set(proj):
     assert list(m["results"]["supp_joint"]) == ["1", "5", "10", "20"]
 
 
+def test_split_composition_counts_cut_instrument(proj):
+    import test2_probe as T
+    rows = [{"clip_id": "a", "instrument": "flute", "split": "train"}, {"clip_id": "b", "instrument": "flute", "split": "test"},
+            {"clip_id": "c", "instrument": "flute", "split": "test"}]
+    comp = T.split_composition(rows, {"a": "flute", "b": "dizi", "c": "dizi"})
+    assert comp == {"flute": {"test": {"dizi": 2}, "train": {"flute": 1}}}
+
+
 def test_probe_separable_data_triggers_leakage_flag(proj):
     import test2_probe as T
     rows, emb = _synthetic_splits({c: 10 for c in ("erhu", "violin", "pipa")}, {c: 6 for c in ("erhu", "violin", "pipa")}, sep=20)
