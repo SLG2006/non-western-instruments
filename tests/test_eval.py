@@ -304,6 +304,10 @@ def test_score_family_descendants_exact_broad_and_filter(proj, aset):
     assert t["violin"]["exact_topk"]["hits"] == 1 and t["violin"]["family_topk"]["hits"] == 1
     assert t["guzheng"]["broad_topk"]["hits"] == 1 and t["guzheng"]["top1_mode"]["label"] == "Tabla"
     assert "exact_topk" not in t["pipa"] and "broad_topk" not in t["pipa"]
+    # family@1: pipa p1 top-1 Sitar (hit), p2 top-1 Snare drum (miss); violin v1 hit, v2 top-1 Flute (miss);
+    # guzheng top-1 Tabla misses at 1 though Zither is in the top 5
+    assert t["pipa"]["family_top1"]["hits"] == 1 and t["violin"]["family_top1"]["hits"] == 1
+    assert t["guzheng"]["family_top1"]["hits"] == 0 and t["guzheng"]["family_topk"]["hits"] == 1
     # unfiltered: generic labels fill the top 5 for pipa
     full = np.ones(len(classes), dtype=bool)
     t2, per2 = test1.score(ids, labels, groups, P, classes, onto, full, 5, 13, content)
@@ -369,6 +373,19 @@ def test_probe_missing_classes_and_counts(proj):
     assert "within_plucked" not in m["probes"]          # pipa alone: its cousin has no clips here
 
 
+def test_probe_fixed_main_class_set(proj):
+    import test2_probe as T
+    rows, emb = _synthetic_splits({"erhu": 12, "violin": 12, "pipa": 3}, {"erhu": 3, "violin": 3, "pipa": 2})
+    m = T.evaluate(rows, emb, seed=13, ks=(1, 5, 10, 20), draws=2, impl="numpy", main_k=10)
+    assert m["main_class_set"]["classes"] == ["erhu", "violin"]
+    assert list(m["results"]["joint"]) == ["1", "5", "10"]                 # no k above main_k
+    for k in ("1", "5", "10"):                                              # same classes at every k
+        assert m["results"]["joint"][k]["classes"] == ["erhu", "violin"] and not m["results"]["joint"][k]["missing"]
+    assert m["results"]["supp_joint"]["1"]["classes"] == ["erhu", "pipa", "violin"]
+    assert "pipa" in m["results"]["supp_joint"]["5"]["missing"]
+    assert list(m["results"]["supp_joint"]) == ["1", "5", "10", "20"]
+
+
 def test_probe_separable_data_triggers_leakage_flag(proj):
     import test2_probe as T
     rows, emb = _synthetic_splits({c: 10 for c in ("erhu", "violin", "pipa")}, {c: 6 for c in ("erhu", "violin", "pipa")}, sep=20)
@@ -430,7 +447,7 @@ def test_end_to_end_on_built_pipeline(built, aset):
     assert all(k in r1 for k in need) and all(k in r2 for k in need)
     assert r1["checkpoint_sha256"] == be.checkpoint_sha256 and r1["n_clips"] == len(E.usable_labels()) > 0
     assert set(r1["metrics"]["primary_instrument_nodes_only"]) == {"erhu", "violin"}
-    assert r2["metrics"]["results"]["joint"]["1"]["classes"] == ["erhu", "violin"]
+    assert r2["metrics"]["results"]["supp_joint"]["1"]["classes"] == ["erhu", "violin"]
     ok, rep = validate.run(["results"])
     assert ok, rep.errors
     # a second run writes a new file; nothing is overwritten

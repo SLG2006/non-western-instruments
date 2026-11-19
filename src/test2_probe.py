@@ -9,9 +9,13 @@ drawn from the train split; the probe is scored on every test clip of the classe
 Probe: multinomial logistic regression, L2, C fixed at 1.0 (not tuned), features standardized with
 statistics of the k-shot training set only. Nothing is fit, tuned or selected on the test split.
 
-A class that has fewer than k train clips or no test clip is marked missing at that k and left out
-of the probe at that k (not filled). Two probes: all classes jointly, and within-family (the family's
-instruments plus their configured cousin). Draws are keyed by (seed, k, draw, class) only, so both
+Main probes use one fixed class set at every k: the classes with at least MAIN_K (10) train clips and
+at least one test clip, run at k = 1, 5, 10. Fixing the set keeps chance level and the competing
+classes the same along the curve. Supplementary probes (names starting "supp_") use every class at
+k = 1, 5, 10, 20; there a class with fewer than k train clips or no test clip is marked missing at that
+k and left out (not filled). They report the small classes and k = 20, apart from the main curve.
+Each set is probed all classes jointly and within-family (the family's instruments plus their
+configured cousin). Draws are keyed by (seed, k, draw, class) only, so both
 probes and both models see the same training clips.
 
 Per class: recall mean and sd over draws, and a percentile cluster bootstrap over test source groups of
@@ -29,6 +33,7 @@ from eval_common import C  # noqa: E402
 import features as F  # noqa: E402
 
 KS = (1, 5, 10, 20)
+MAIN_K = 10  # main probes: fixed class set = classes with >= MAIN_K train clips and a test clip
 DRAWS = 10
 PROBE_C = 1.0
 BOOT_REPS = 2000
@@ -204,7 +209,18 @@ def leakage_flags(probes):
     return flags
 
 
-def evaluate(splits, emb, seed, ks=KS, draws=DRAWS, impl="auto"):
+def main_classes(splits, main_k=MAIN_K):
+    """Classes that can supply main_k train clips and at least one test clip."""
+    n = defaultdict(Counter)
+    for r in splits:
+        n[r["instrument"]][r["split"]] += 1
+    return sorted(c for c, v in n.items() if v["train"] >= main_k and v["test"] >= 1)
+
+
+def evaluate(splits, emb, seed, ks=KS, draws=DRAWS, impl="auto", main_k=None):
+    """main_k=None: one set of probes over all classes at ks (classes drop out where they run short).
+    main_k=N: main probes over the fixed set main_classes(splits, N) at the ks <= N, plus the
+    all-class probes at ks under names prefixed "supp_"."""
     classes = sorted({r["instrument"] for r in splits})
     sides = defaultdict(set)
     for r in splits:
@@ -212,10 +228,22 @@ def evaluate(splits, emb, seed, ks=KS, draws=DRAWS, impl="auto"):
     leaks = sorted(g for g, s in sides.items() if len(s) > 1)
     if leaks:
         raise SystemExit(f"source groups on both sides of the split: {leaks[:5]}")
-    probes = {"joint": classes, **family_probes(classes)}
-    out = {name: {str(k): run_probe(cl, k, splits, emb, seed, draws, impl) for k in ks} for name, cl in probes.items()}
-    return {"probes": {n: {"classes": cl} for n, cl in probes.items()}, "results": out,
-            "split_counts": split_counts(splits), "leakage_flags": leakage_flags(out)}
+    plan = {}  # probe name -> (class list, ks)
+    if main_k is None:
+        plan.update({n: (cl, ks) for n, cl in {"joint": classes, **family_probes(classes)}.items()})
+    else:
+        main = main_classes(splits, main_k)
+        mks = tuple(k for k in ks if k <= main_k)
+        if len(main) >= 2:
+            plan.update({n: (cl, mks) for n, cl in {"joint": main, **family_probes(main)}.items()})
+        plan.update({f"supp_{n}": (cl, ks) for n, cl in {"joint": classes, **family_probes(classes)}.items()})
+    out = {name: {str(k): run_probe(cl, k, splits, emb, seed, draws, impl) for k in pks}
+           for name, (cl, pks) in plan.items()}
+    m = {"probes": {n: {"classes": cl, "ks": list(pks)} for n, (cl, pks) in plan.items()}, "results": out,
+         "split_counts": split_counts(splits), "leakage_flags": leakage_flags(out)}
+    if main_k is not None:
+        m["main_class_set"] = {"rule": f">= {main_k} train clips and >= 1 test clip", "classes": main_classes(splits, main_k)}
+    return m
 
 
 def render(metrics):
@@ -252,7 +280,7 @@ def run(model, features=None, dry_run=False, allow_dirty=False, impl="sklearn"):
     meta, _, X, _ = F.load_features(fdir, ids)
     emb = dict(zip(ids, X))
     seed = C.cfg("pipeline")["seed"]
-    metrics = evaluate(splits, emb, seed, impl=impl)
+    metrics = evaluate(splits, emb, seed, impl=impl, main_k=MAIN_K)
     for f in metrics["leakage_flags"]:
         print("LEAKAGE CHECK:", f)
     print(render(metrics))
@@ -262,7 +290,8 @@ def run(model, features=None, dry_run=False, allow_dirty=False, impl="sklearn"):
                "created_at": E.now(), "n_clips": len(ids), "features_meta": meta, "gate_warnings": warnings,
                "settings": {"ks": list(KS), "draws": DRAWS, "C": PROBE_C, "standardize": "train k-shot set only",
                             "bootstrap_reps": BOOT_REPS, "class_of_clip": "human label from data/splits.csv",
-                            "missing_rule": "class with < k train clips or no test clip is left out at that k",
+                            "main_class_set": f"fixed: classes with >= {MAIN_K} train clips and >= 1 test clip; k <= {MAIN_K}",
+                            "missing_rule": "supp_ probes: class with < k train clips or no test clip is left out at that k",
                             "leak_flag_threshold_k1": LEAK_RECALL},
                "metrics": metrics}
     return E.write_result("test2", model, payload, dry_run)

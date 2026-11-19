@@ -6,7 +6,8 @@
 
 A clip's class is its human pass-1 label (usable rule of scripts/validate.py), not the batch it was cut
 under. For each instrument: (a) most common top-1 label and its share; (b) family hit in top-k, where a
-hit is any family node from config/instruments.json or any ontology descendant of it; (c) exact label in
+hit is any family node from config/instruments.json or any ontology descendant of it, at k=5 and at k=1
+(top-ranked class only); (c) exact label in
 top-k where audioset_exact is set; (d) broad-label hit for tier-2 instruments (proposed mapping below).
 Primary table ranks instrument nodes only; the unfiltered 527-way ranking is the secondary table.
 Proportions get Wilson 95% intervals and a cluster bootstrap over source groups. No pooled
@@ -125,32 +126,37 @@ def score(clip_ids, labels, groups, probs, classes, onto, mask, k=TOP_K, seed=0,
             row["broad_label"] = br
             row["broad_topk"] = (_share([j in tops[c] for c in cs], g, rng) if j is not None
                                  else {"error": f"{br!r} not in class list"})
+        # family@1: the top-ranked class is a family node or a descendant. Computed last so the
+        # bootstrap draws for the metrics above are unchanged from earlier runs.
+        row["family_top1"] = _share([bool(tops[c]) and tops[c][0] in fam for c in cs], g, rng)
         out[i] = row
     per_clip = {c: [names[j] for j in tops[c]] for c in clip_ids}
     return out, per_clip
 
 
 def _fmt(m):
+    """Share, hits/n and the Wilson 95% interval (the cluster bootstrap stays in the JSON)."""
     if not m or "share" not in m:
         return "-"
-    lo, hi = m["boot95_groups"]
-    return f"{m['share']:.2f} ({m['hits']}/{m['n']}; boot {lo:.2f}-{hi:.2f})"
+    lo, hi = m["wilson95"]
+    return f"{m['share']:.2f} ({m['hits']}/{m['n']}; {lo:.2f}-{hi:.2f})"
 
 
 def render(table, title):
     """Markdown, grouped by tradition, controls and cousins in their own blocks; cousin family share alongside."""
-    lines = [f"### {title}", "", "| instrument | n | groups | top-1 (share) | family@k | exact@k | broad@k | cousin | cousin family@k |",
-             "|---|---|---|---|---|---|---|---|---|"]
+    lines = [f"### {title}", "", "| instrument | n | groups | top-1 (share) | family@1 | family@k | exact@k | broad@k | cousin | cousin family@1 |",
+             "|---|---|---|---|---|---|---|---|---|---|"]
     for trad in E.TRADITION_ORDER:
         rows = [(i, r) for i, r in table.items() if r["tradition"] == trad]
         if not rows:
             continue
-        lines.append(f"| **{trad}** | | | | | | | | |")
+        lines.append(f"| **{trad}** | | | | | | | | | |")
         for i, r in rows:
             cz = table.get(r["cousin"]) if r["cousin"] else None
             lines.append(f"| {i} | {r['n']} | {r['n_source_groups']} | {r['top1_mode']['label']} "
-                         f"({r['top1_mode']['share']:.2f}) | {_fmt(r['family_topk'])} | {_fmt(r.get('exact_topk'))} | "
-                         f"{_fmt(r.get('broad_topk'))} | {r['cousin'] or '-'} | {_fmt(cz['family_topk']) if cz else '-'} |")
+                         f"({r['top1_mode']['share']:.2f}) | {_fmt(r['family_top1'])} | {_fmt(r['family_topk'])} | "
+                         f"{_fmt(r.get('exact_topk'))} | {_fmt(r.get('broad_topk'))} | {r['cousin'] or '-'} | "
+                         f"{_fmt(cz['family_top1']) if cz else '-'} |")
     return "\n".join(lines)
 
 
@@ -188,6 +194,7 @@ def run(model, class_labels, ontology, features=None, dry_run=False, allow_dirty
         "settings": {"top_k": TOP_K, "bootstrap_reps": BOOT_REPS, "ci": "Wilson 95% and percentile cluster bootstrap over source_group",
                      "class_of_clip": "human pass-1 label, usable rule of scripts/validate.py:usable_clips",
                      "family_hit": "any audioset_family node or ontology descendant in top-k",
+                     "family_top1": "the top-ranked class is an audioset_family node or ontology descendant",
                      "instrument_root": PROPOSED_INSTRUMENT_ROOT,
                      "excluded_instrument_nodes": list(PROPOSED_EXCLUDED_INSTRUMENT_NODES),
                      "broad_labels": PROPOSED_BROAD_LABELS},
