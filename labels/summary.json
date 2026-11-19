@@ -1,10 +1,10 @@
 {
- "labelled_pass1": 725,
+ "labelled_pass1": 806,
  "total_clips": 806,
  "dropped": {
-  "not_solo": 33,
+  "not_solo": 34,
   "not_confident": 21,
-  "reject": 268,
+  "reject": 308,
   "unsure": 9
  },
  "usable": {
@@ -44,8 +44,8 @@
    "meets_minimum": false
   },
   "bombo": {
-   "clips": 0,
-   "source_groups": 0,
+   "clips": 5,
+   "source_groups": 4,
    "meets_minimum": false
   },
   "oud": {
@@ -94,9 +94,9 @@
    "meets_minimum": true
   },
   "snare_drum": {
-   "clips": 0,
-   "source_groups": 0,
-   "meets_minimum": false
+   "clips": 35,
+   "source_groups": 23,
+   "meets_minimum": true
   }
  }
 }
