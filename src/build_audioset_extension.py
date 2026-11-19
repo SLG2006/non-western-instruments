@@ -8,8 +8,8 @@ parent AudioSet class (the deepest of its configured family labels, or its broad
 decided in docs/label_guide.md, and this dataset's counts and example clip ids.
 
 Ids use a project namespace (/nwi/<instrument>), not Freebase MIDs: none are invented. Descriptions are
-drafts written from general organology and are NOT checked against a source; citation_uri is left empty
-for the human to fill from a source he has read. Writes docs/audioset_extension_draft.json. The final
+checked claim by claim against the Wikipedia page given as citation_uri (2026-11-19). Scope comes from the
+label guide table. Writes docs/audioset_extension_draft.json. The final
 file belongs in config/ (a gate directory): the human moves it.
 """
 import json, sys
@@ -21,36 +21,43 @@ import eval_common as E  # noqa: E402
 from eval_common import C  # noqa: E402
 import validate  # noqa: E402
 
-DESCRIPTION = {  # draft wording, unverified [U]
-    "erhu": "Sounds of a two-stringed Chinese bowed fiddle with a small skin-covered resonator, held upright, "
-            "with the bow hair passing between the strings.",
-    "pipa": "Sounds of a four-stringed Chinese plucked lute with a pear-shaped body and frets, held upright.",
-    "dizi": "Sounds of a Chinese transverse bamboo flute, often fitted with a thin membrane over an extra hole "
-            "that adds a buzzing timbre.",
-    "guzheng": "Sounds of a Chinese plucked board zither with many strings over movable bridges.",
-    "charango": "Sounds of a small Andean plucked lute with five courses of paired strings.",
-    "quena": "Sounds of an Andean end-blown notched flute, traditionally made of cane, with finger holes.",
-    "siku": "Sounds of an Andean panpipe (zampona) made of cane tubes, usually in two rows.",
-    "bombo": "Sounds of the bombo leguero, a deep double-headed Andean and Argentine drum with a wooden shell "
-             "and hide heads, struck with a mallet on the head and the rim.",
-    "oud": "Sounds of a short-necked fretless plucked lute with a pear-shaped body, played with a plectrum in "
-           "Arab, Turkish and Persian music.",
-    "ney": "Sounds of an end-blown, rim-blown cane flute used in Arab, Turkish and Persian music.",
-    "qanun": "Sounds of a trapezoidal plucked board zither of Arab and Turkish music with many courses of "
-             "strings and small levers for retuning.",
-    "darbuka": "Sounds of a single-headed goblet drum played with the hands.",
+WIKI = "https://en.wikipedia.org/wiki/"
+# Descriptions checked claim by claim against citation_uri on 2026-11-19 [V]; wording adjusted where the
+# page did not support a claim (ney: no "rim-blown"; bombo: Argentine; siku: bamboo or cane; qanun: box zither,
+# levers change pitch during playing; guzheng: no "board zither").
+DESCRIPTION = {
+    "erhu": ("Sounds of a two-stringed Chinese bowed fiddle with a small resonator covered in python skin, held "
+             "upright, with the bow hair passing between the strings.", "Erhu"),
+    "pipa": ("Sounds of a four-stringed Chinese plucked lute with a pear-shaped body and frets, held upright.", "Pipa"),
+    "dizi": ("Sounds of a Chinese transverse flute, usually of bamboo, often fitted with a thin membrane over an "
+             "extra hole that gives a buzzing timbre.", "Dizi_(instrument)"),
+    "guzheng": ("Sounds of a Chinese plucked zither with many strings over movable bridges.", "Guzheng"),
+    "charango": ("Sounds of a small Andean plucked instrument of the lute family with five courses of paired "
+                 "strings.", "Charango"),
+    "quena": ("Sounds of an Andean end-blown flute with a notch cut into the end, traditionally of cane or wood, "
+              "with finger holes.", "Quena"),
+    "siku": ("Sounds of an Andean panpipe (zampona) of bamboo or cane pipes, split across two rows played in "
+             "alternation.", "Siku_(instrument)"),
+    "bombo": ("Sounds of the bombo leguero, a double-headed Argentine folk drum traditionally made of a hollowed "
+              "tree trunk with animal-skin heads, struck on the head and the wooden rim.", "Bombo_leg%C3%BCero"),
+    "oud": ("Sounds of a short-necked, fretless, pear-shaped lute played with a plectrum, in Arab, Turkish and "
+            "Persian music.", "Oud"),
+    "ney": ("Sounds of an end-blown flute made of cane or giant reed, used in Arab, Turkish and Persian music.", "Ney"),
+    "qanun": ("Sounds of a large trapezoidal box zither of Arab and Turkish music, plucked, with many courses of "
+              "strings and small levers (mandals) that change a course's pitch during playing.", "Qanun_(instrument)"),
+    "darbuka": ("Sounds of a single-headed goblet drum played with the fingertips and palms.", "Goblet_drum"),
 }
 
-SCOPE = {  # decisions recorded in docs/label_guide.md; anything else is still open there
-    "erhu": {"includes": ["erhu"], "excludes": ["jinghu", "gaohu", "zhonghu", "banhu", "'huqin' without erhu"],
-             "decided": "2026-11-15"},
-    "charango": {"includes": ["charango", "ronroco", "walaycho (hualaycho)"], "excludes": [], "decided": "2026-11-16"},
-    "bombo": {"includes": ["bombo leguero", "bombo andino"],
-              "excludes": ["Western bass drum", "kick drums", "synthesized drums", "maracatu and other non-Andean bombos"],
-              "decided": "2026-11-16"},
-    "darbuka": {"includes": ["darbuka", "darbouka", "doumbek", "goblet drum"], "excludes": ["Persian tombak"],
-                "decided": "label guide note (exclusion column still TODO)"},
-}
+
+def guide_rows():
+    """instrument -> (accepted names, excludes) from the table in docs/label_guide.md."""
+    out = {}
+    for ln in (C.root() / "docs" / "label_guide.md").read_text(encoding="utf-8").split("\n"):
+        cells = [c.strip() for c in ln.strip().strip("|").split("|")]
+        if len(cells) >= 7 and cells[0].isdigit():
+            out[cells[1]] = (cells[4], cells[5])
+    return out
+
 
 BROAD = {"guzheng": "Zither", "qanun": "Zither", "darbuka": "Drum", "bombo": "Bass drum"}
 
@@ -61,6 +68,7 @@ def main():
     ins = C.instruments()
     usable = validate.usable_clips()
     clips = {r["clip_id"]: r for r in C.read_csv(C.p("clips"))}
+    guide = guide_rows()
     out = []
     for i, m in ins.items():
         if m["role"] != "target":
@@ -70,18 +78,18 @@ def main():
         mine = sorted(c for c, lab in usable.items() if lab == i)
         out.append({
             "id": f"/nwi/{i}", "name": m["display"], "tradition": m["group"], "family": m["family"],
-            "description": DESCRIPTION[i], "description_status": "draft, unverified",
-            "citation_uri": "",
+            "description": DESCRIPTION[i][0], "description_status": "checked against citation_uri 2026-11-19",
+            "citation_uri": WIKI + DESCRIPTION[i][1],
             "parent_id": onto.id_of(parent), "parent_name": parent,
             "audioset_tier": m["audioset_tier"],
-            "scope": SCOPE.get(i, {"includes": [], "excludes": [], "decided": "open in docs/label_guide.md"}),
+            "scope": {"accepted_names": guide[i][0], "excludes": guide[i][1], "source": "docs/label_guide.md"},
             "nwi_usable_clips": len(mine),
             "nwi_source_groups": len({clips[c]["source_group"] for c in mine}),
             "nwi_positive_examples": mine[:3],
         })
     f = C.root() / "docs" / "audioset_extension_draft.json"
-    f.write_text(json.dumps({"note": "Draft. Ids are project-namespaced, not Freebase MIDs. Descriptions are "
-                                     "unverified; fill citation_uri from a source before release.",
+    f.write_text(json.dumps({"note": "Ids are project-namespaced, not Freebase MIDs. Descriptions checked against "
+                                     "citation_uri on 2026-11-19.",
                              "ontology_source": "data/audioset/ontology.json",
                              "ontology_sha256": E.sha256_file(aset / "ontology.json"),
                              "entries": out}, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")

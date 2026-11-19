@@ -18,3 +18,4 @@ checkpoints/
 third_party/
 checkpoints/
 data/audioset/
+data/release/
