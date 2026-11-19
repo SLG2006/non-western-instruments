@@ -1,12 +1,137 @@
 {
- "n_relabelled": 12,
- "raw_agreement": 0.9166666666666666,
- "cohens_kappa": 0.8695652173913044,
+ "n_relabelled": 92,
+ "raw_agreement": 0.717391304347826,
+ "cohens_kappa": 0.6521233275159977,
  "disagreements": [
+  {
+   "clip_id": "acoustic_guitar_fs319985_0",
+   "pass1": "acoustic_guitar",
+   "pass2": "reject"
+  },
+  {
+   "clip_id": "bombo_fs251344_2",
+   "pass1": "reject",
+   "pass2": "bombo"
+  },
+  {
+   "clip_id": "darbuka_fs140539_0",
+   "pass1": "darbuka",
+   "pass2": "snare_drum"
+  },
+  {
+   "clip_id": "darbuka_fs149152_0",
+   "pass1": "darbuka",
+   "pass2": "tabla"
+  },
+  {
+   "clip_id": "darbuka_fs516525_0",
+   "pass1": "darbuka",
+   "pass2": "tabla"
+  },
+  {
+   "clip_id": "dizi_fs678907_1",
+   "pass1": "dizi",
+   "pass2": "quena"
+  },
+  {
+   "clip_id": "dizi_fs725829_0",
+   "pass1": "dizi",
+   "pass2": "reject"
+  },
+  {
+   "clip_id": "dizi_wc46272858_0",
+   "pass1": "dizi",
+   "pass2": "quena"
+  },
+  {
+   "clip_id": "erhu_fs147662_1",
+   "pass1": "erhu",
+   "pass2": "reject"
+  },
+  {
+   "clip_id": "erhu_fs162077_0",
+   "pass1": "erhu",
+   "pass2": "reject"
+  },
+  {
+   "clip_id": "erhu_fs467481_0",
+   "pass1": "erhu",
+   "pass2": "violin"
+  },
   {
    "clip_id": "erhu_fs65857_0",
    "pass1": "erhu",
    "pass2": "violin"
+  },
+  {
+   "clip_id": "flute_fs154239_0",
+   "pass1": "flute",
+   "pass2": "ney"
+  },
+  {
+   "clip_id": "flute_fs333996_0",
+   "pass1": "flute",
+   "pass2": "ney"
+  },
+  {
+   "clip_id": "flute_fs721289_0",
+   "pass1": "acoustic_guitar",
+   "pass2": "flute"
+  },
+  {
+   "clip_id": "flute_fs786238_1",
+   "pass1": "flute",
+   "pass2": "quena"
+  },
+  {
+   "clip_id": "guzheng_fs24552_0",
+   "pass1": "guzheng",
+   "pass2": "unsure"
+  },
+  {
+   "clip_id": "ney_fs195082_0",
+   "pass1": "ney",
+   "pass2": "erhu"
+  },
+  {
+   "clip_id": "ney_fs491649_0",
+   "pass1": "siku",
+   "pass2": "ney"
+  },
+  {
+   "clip_id": "quena_fs569392_2",
+   "pass1": "ney",
+   "pass2": "flute"
+  },
+  {
+   "clip_id": "sitar_fs411661_0",
+   "pass1": "sitar",
+   "pass2": "reject"
+  },
+  {
+   "clip_id": "sitar_fs422548_0",
+   "pass1": "oud",
+   "pass2": "qanun"
+  },
+  {
+   "clip_id": "sitar_fs592859_0",
+   "pass1": "sitar",
+   "pass2": "reject"
+  },
+  {
+   "clip_id": "sitar_fs656514_0",
+   "pass1": "sitar",
+   "pass2": "reject"
+  },
+  {
+   "clip_id": "snare_drum_fs663316_0",
+   "pass1": "reject",
+   "pass2": "snare_drum"
+  },
+  {
+   "clip_id": "violin_fs182731_0",
+   "pass1": "violin",
+   "pass2": "ney"
   }
  ]
 }
