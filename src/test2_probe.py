@@ -37,6 +37,7 @@ MAIN_K = 10  # main probes: fixed class set = classes with >= MAIN_K train clips
 DRAWS = 10
 PROBE_C = 1.0
 BOOT_REPS = 2000
+PADDED_BELOW = 9.995  # same cut as Test 1: content_s below this means zero-padded
 LEAK_RECALL = 0.95  # mean recall at k=1 at or above this is flagged as possible leakage
 
 
@@ -226,7 +227,7 @@ def main_classes(splits, main_k=MAIN_K):
     return sorted(c for c, v in n.items() if v["train"] >= main_k and v["test"] >= 1)
 
 
-def evaluate(splits, emb, seed, ks=KS, draws=DRAWS, impl="auto", main_k=None):
+def evaluate(splits, emb, seed, ks=KS, draws=DRAWS, impl="auto", main_k=None, main_set=None):
     """main_k=None: one set of probes over all classes at ks (classes drop out where they run short).
     main_k=N: main probes over the fixed set main_classes(splits, N) at the ks <= N, plus the
     all-class probes at ks under names prefixed "supp_"."""
@@ -241,7 +242,7 @@ def evaluate(splits, emb, seed, ks=KS, draws=DRAWS, impl="auto", main_k=None):
     if main_k is None:
         plan.update({n: (cl, ks) for n, cl in {"joint": classes, **family_probes(classes)}.items()})
     else:
-        main = main_classes(splits, main_k)
+        main = sorted(main_set) if main_set else main_classes(splits, main_k)
         mks = tuple(k for k in ks if k <= main_k)
         if len(main) >= 2:
             plan.update({n: (cl, mks) for n, cl in {"joint": main, **family_probes(main)}.items()})
@@ -251,7 +252,8 @@ def evaluate(splits, emb, seed, ks=KS, draws=DRAWS, impl="auto", main_k=None):
     m = {"probes": {n: {"classes": cl, "ks": list(pks)} for n, (cl, pks) in plan.items()}, "results": out,
          "split_counts": split_counts(splits), "leakage_flags": leakage_flags(out)}
     if main_k is not None:
-        m["main_class_set"] = {"rule": f">= {main_k} train clips and >= 1 test clip", "classes": main_classes(splits, main_k)}
+        m["main_class_set"] = ({"rule": "given by --main-classes (comparison run)", "classes": sorted(main_set)} if main_set
+                               else {"rule": f">= {main_k} train clips and >= 1 test clip", "classes": main_classes(splits, main_k)})
     return m
 
 
@@ -274,7 +276,7 @@ def render(metrics):
     return "\n".join(lines)
 
 
-def run(model, features=None, dry_run=False, allow_dirty=False, impl="sklearn"):
+def run(model, features=None, dry_run=False, allow_dirty=False, impl="sklearn", exclude_padded=False, main_set=None):
     warnings = E.require_gates()
     prov = E.dataset_commit()
     if prov["dataset_dirty"] and not allow_dirty:
@@ -284,18 +286,24 @@ def run(model, features=None, dry_run=False, allow_dirty=False, impl="sklearn"):
     stale = [r["clip_id"] for r in splits if usable.get(r["clip_id"]) != r["instrument"]]
     if stale or set(usable) - {r["clip_id"] for r in splits}:
         raise SystemExit("data/splits.csv does not match the current usable labels; rerun scripts/make_splits.py")
+    n_padded_dropped = 0
+    if exclude_padded:  # sensitivity run: same split, minus clips zero-padded to 10 s
+        content = {r["clip_id"]: float(r["content_s"]) for r in C.read_csv(C.p("clips"))}
+        kept = [r for r in splits if content[r["clip_id"]] >= PADDED_BELOW]
+        n_padded_dropped = len(splits) - len(kept)
+        splits = kept
     ids = [r["clip_id"] for r in splits]
     fdir = F.find_features_dir(model, features)
     meta, _, X, _ = F.load_features(fdir, ids)
     emb = dict(zip(ids, X))
     seed = C.cfg("pipeline")["seed"]
-    metrics = evaluate(splits, emb, seed, impl=impl, main_k=MAIN_K)
+    metrics = evaluate(splits, emb, seed, impl=impl, main_k=MAIN_K, main_set=main_set)
     cut = {r["clip_id"]: r["instrument"] for r in C.read_csv(C.p("clips"))}
     metrics["split_composition_by_cut_instrument"] = split_composition(splits, cut)
     for f in metrics["leakage_flags"]:
         print("LEAKAGE CHECK:", f)
     print(render(metrics))
-    payload = {"experiment": "test2_probe", "model": model, "checkpoint_sha256": meta["checkpoint_sha256"],
+    payload = {"experiment": "test2_probe_unpadded" if exclude_padded else "test2_probe", "model": model, "checkpoint_sha256": meta["checkpoint_sha256"],
                "checkpoint_name": meta["checkpoint_name"], "seed": seed, **prov,
                "dataset_files_sha256": E.file_hashes(), "split_file": "data/splits.csv",
                "created_at": E.now(), "n_clips": len(ids), "features_meta": meta, "gate_warnings": warnings,
@@ -303,9 +311,12 @@ def run(model, features=None, dry_run=False, allow_dirty=False, impl="sklearn"):
                             "bootstrap_reps": BOOT_REPS, "class_of_clip": "human label from data/splits.csv",
                             "main_class_set": f"fixed: classes with >= {MAIN_K} train clips and >= 1 test clip; k <= {MAIN_K}",
                             "missing_rule": "supp_ probes: class with < k train clips or no test clip is left out at that k",
-                            "leak_flag_threshold_k1": LEAK_RECALL},
+                            "leak_flag_threshold_k1": LEAK_RECALL,
+                            "exclude_padded": exclude_padded, "padded_below_s": PADDED_BELOW,
+                            "n_padded_dropped": n_padded_dropped},
                "metrics": metrics}
-    return E.write_result("test2", model, payload, dry_run)
+    name = ("test2_unpadded" if exclude_padded else "test2") + ("_fixedset" if main_set else "")
+    return E.write_result(name, model, payload, dry_run)
 
 
 def main(argv=None):
@@ -314,10 +325,14 @@ def main(argv=None):
     ap.add_argument("--features")
     ap.add_argument("--probe-impl", default="sklearn", choices=["sklearn", "numpy"],
                     help="real runs use scikit-learn; numpy is the dependency-free path the tests exercise")
+    ap.add_argument("--exclude-padded", action="store_true",
+                    help="sensitivity run: same split without clips zero-padded to 10 s (content_s below 9.995 s)")
+    ap.add_argument("--main-classes", help="comma-separated fixed main class set (comparison runs only)")
     ap.add_argument("--allow-dirty", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args(argv)
-    run(a.model, a.features, a.dry_run, a.allow_dirty, a.probe_impl)
+    run(a.model, a.features, a.dry_run, a.allow_dirty, a.probe_impl, a.exclude_padded,
+        a.main_classes.split(",") if a.main_classes else None)
     return 0
 
 
