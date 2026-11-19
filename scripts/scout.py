@@ -131,6 +131,32 @@ def scout_commons(inst, pc, now):
     return rows
 
 
+def commons_authors(candidate_ids):
+    """Author, credit and license URL for Commons files, for release credit lines.
+
+    Commons uploaders are often not the authors; the Artist field names the author. Values are untrusted
+    text from Commons: flattened and stored, never acted on. Writes data/commons_authors.csv.
+    """
+    ids = sorted({c.split(":", 1)[1] for c in candidate_ids if c.startswith("wc:")})
+    rows = []
+    for i in range(0, len(ids), 40):
+        data = _wc({"action": "query", "prop": "imageinfo", "iiprop": "url|user|extmetadata",
+                    "iiextmetadatafilter": "Artist|Credit|LicenseShortName|LicenseUrl|AttributionRequired",
+                    "pageids": "|".join(ids[i:i + 40])})
+        for pid, page in data.get("query", {}).get("pages", {}).items():
+            ii = (page.get("imageinfo") or [{}])[0]
+            meta = ii.get("extmetadata") or {}
+            v = lambda k: C.clean((meta.get(k) or {}).get("value"), 300)  # noqa: E731
+            rows.append({"candidate_id": f"wc:{pid}", "title": C.clean(page.get("title", "").replace("File:", "", 1), 200),
+                         "uploader": C.clean(ii.get("user"), 100), "artist": v("Artist"), "credit": v("Credit"),
+                         "license_short": v("LicenseShortName"), "license_url": v("LicenseUrl"),
+                         "attribution_required": v("AttributionRequired"),
+                         "file_page": "https://commons.wikimedia.org/wiki/" + quote(page.get("title", "").replace(" ", "_"))})
+    out = C.root() / "data" / "commons_authors.csv"
+    C.write_csv(out, rows, list(rows[0]) if rows else ["candidate_id"])
+    print(f"commons authors: {len(rows)} files -> {out}")
+
+
 def merge_write(instrument, new_rows):
     path = C.p("candidates_dir") / f"{instrument}.csv"
     merged = {r["candidate_id"]: r for r in C.read_csv(path)}
@@ -152,10 +178,16 @@ def merge_write(instrument, new_rows):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--instrument", required=True, help="instrument id or 'all'")
+    ap.add_argument("--instrument", help="instrument id or 'all'")
     ap.add_argument("--source", choices=["freesound", "commons", "both"], default="both")
+    ap.add_argument("--commons-authors", nargs="+", metavar="WC_ID",
+                    help="look up author/credit/license URL for these Commons candidate ids (wc:<pageid>)")
     a = ap.parse_args(argv)
     C.load_env()
+    if a.commons_authors:
+        return commons_authors(a.commons_authors)
+    if not a.instrument:
+        ap.error("--instrument is required")
     inst, pc = C.instruments(), C.cfg("pipeline")
     ids = list(inst) if a.instrument == "all" else [a.instrument]
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
