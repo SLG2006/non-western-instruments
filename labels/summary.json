@@ -1,0 +1,102 @@
+{
+ "labelled_pass1": 806,
+ "total_clips": 806,
+ "dropped": {
+  "not_solo": 34,
+  "not_confident": 21,
+  "reject": 308,
+  "unsure": 9
+ },
+ "usable": {
+  "erhu": {
+   "clips": 25,
+   "source_groups": 12,
+   "meets_minimum": true
+  },
+  "pipa": {
+   "clips": 7,
+   "source_groups": 3,
+   "meets_minimum": false
+  },
+  "dizi": {
+   "clips": 25,
+   "source_groups": 13,
+   "meets_minimum": true
+  },
+  "guzheng": {
+   "clips": 25,
+   "source_groups": 10,
+   "meets_minimum": true
+  },
+  "charango": {
+   "clips": 30,
+   "source_groups": 9,
+   "meets_minimum": true
+  },
+  "quena": {
+   "clips": 11,
+   "source_groups": 6,
+   "meets_minimum": false
+  },
+  "siku": {
+   "clips": 8,
+   "source_groups": 6,
+   "meets_minimum": false
+  },
+  "bombo": {
+   "clips": 5,
+   "source_groups": 4,
+   "meets_minimum": false
+  },
+  "oud": {
+   "clips": 15,
+   "source_groups": 7,
+   "meets_minimum": false
+  },
+  "ney": {
+   "clips": 25,
+   "source_groups": 6,
+   "meets_minimum": true
+  },
+  "qanun": {
+   "clips": 14,
+   "source_groups": 5,
+   "meets_minimum": false
+  },
+  "darbuka": {
+   "clips": 32,
+   "source_groups": 14,
+   "meets_minimum": true
+  },
+  "sitar": {
+   "clips": 17,
+   "source_groups": 17,
+   "meets_minimum": false
+  },
+  "tabla": {
+   "clips": 19,
+   "source_groups": 15,
+   "meets_minimum": false
+  },
+  "violin": {
+   "clips": 45,
+   "source_groups": 20,
+   "meets_minimum": true
+  },
+  "flute": {
+   "clips": 48,
+   "source_groups": 13,
+   "meets_minimum": true
+  },
+  "acoustic_guitar": {
+   "clips": 48,
+   "source_groups": 17,
+   "meets_minimum": true
+  },
+  "snare_drum": {
+   "clips": 35,
+   "source_groups": 23,
+   "meets_minimum": true
+  }
+ }
+}

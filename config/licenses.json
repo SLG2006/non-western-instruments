@@ -1,0 +1,20 @@
+{
+  "_note": "HUMAN-ONLY FILE. Agents may not edit it. ShareAlike licenses (by-sa, by-nc-sa) rejected by the author on 2026-11-15: they conflict with a CC BY-NC release.",
+  "accept": [
+    "cc0",
+    "pd",
+    "by",
+    "by-nc"
+  ],
+  "needs_human": [
+    "unknown",
+    "other"
+  ],
+  "reject": [
+    "by-nd",
+    "by-nc-nd",
+    "sampling+",
+    "by-sa",
+    "by-nc-sa"
+  ]
+}

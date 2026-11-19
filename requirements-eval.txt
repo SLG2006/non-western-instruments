@@ -1,0 +1,5 @@
+# Install when the eval-engineer starts (large download).
+torch
+torchaudio
+scikit-learn
+panns-inference
