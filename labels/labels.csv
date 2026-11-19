@@ -167,9 +167,9 @@ pipa_fs162039_1,1,reject,n,n,Too many sounds,2026-11-18T01:52:07Z
 sitar_fs124124_0,1,sitar,n,y,,2026-11-18T01:52:49Z
 pipa_fs162087_0,1,pipa,y,y,,2026-11-18T01:52:55Z
 sitar_fs42268_0,1,sitar,y,n,,2026-11-18T01:53:08Z
-sitar_wc105114161_0,1,sitar,y,y,,2026-11-18T01:53:48Z
+sitar_wc105114161_0,1,reject,n,n,excluded by label guide: bowed sitar (relabeled 20261119),2026-11-18T01:53:48Z
 sitar_fs534896_0,1,sitar,y,y,,2026-11-18T01:53:54Z
-sitar_wc88877956_0,1,sitar,y,y,,2026-11-18T01:54:04Z
+sitar_wc88877956_0,1,reject,n,n,excluded by label guide: bowed sitar (relabeled 20261119),2026-11-18T01:54:04Z
 sitar_fs546611_0,1,sitar,y,n,,2026-11-18T01:54:55Z
 oud_fs160461_0,1,oud,y,n,,2026-11-18T01:55:06Z
 pipa_wc84702574_0,1,reject,n,n,Electronic,2026-11-18T01:55:11Z
