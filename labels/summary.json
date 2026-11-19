@@ -1,10 +1,10 @@
 {
- "labelled_pass1": 605,
+ "labelled_pass1": 725,
  "total_clips": 806,
  "dropped": {
-  "not_solo": 28,
+  "not_solo": 33,
   "not_confident": 21,
-  "reject": 204,
+  "reject": 268,
   "unsure": 9
  },
  "usable": {
@@ -64,9 +64,9 @@
    "meets_minimum": false
   },
   "darbuka": {
-   "clips": 0,
-   "source_groups": 0,
-   "meets_minimum": false
+   "clips": 32,
+   "source_groups": 14,
+   "meets_minimum": true
   },
   "sitar": {
    "clips": 17,
@@ -74,8 +74,8 @@
    "meets_minimum": false
   },
   "tabla": {
-   "clips": 0,
-   "source_groups": 0,
+   "clips": 19,
+   "source_groups": 15,
    "meets_minimum": false
   },
   "violin": {
