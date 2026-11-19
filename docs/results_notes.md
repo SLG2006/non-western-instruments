@@ -39,7 +39,14 @@ Source: split_composition_by_cut_instrument in the Test 2 files. Low flute probe
 - 8 of 18 classes are below 20 usable clips: pipa 7, siku 8, bombo 5, quena 11, qanun 14, oud 15, sitar 17, tabla 19 (labels/summary.json). Report their Test 1 rows with n; they are outside the main Test 2 set.
 - Middle East kept although oud and qanun fall short (CLAUDE.md fallback rule): West African searches returned fewer real candidates (ngoni 0, kora about 6, tambin 0; djembe 104).
 - Few uploaders in some classes: ney 25 clips from 6 source groups; qanun 5; pipa 3.
-- 125 of 806 cut clips (75 of 434 usable) are zero-padded to 10 s (short source recordings); both models average over the padding. Uneven by class: flute has 21 padded usable clips of 48 (results/dataset/dataset_table.md).
+- Padding (checked for Test 1). 75 of 434 usable clips are zero-padded to 10 s; flute has 21 of 48 (results/dataset/dataset_table.md). Test 1 rerun without them: results/test1_unpadded_panns_cnn14_20261119T071500Z.json and results/test1_unpadded_beats_20261119T071501Z.json. Shares that move outside the full-run Wilson interval: guzheng broad@5 (Zither) rises from 0.60 to 0.78 (PANNs) and 0.80 to 0.94 (BEATs) when its 7 padded clips are dropped; guzheng family@5 (BEATs) 0.96 to 1.00; siku family@1 and family@5 0.88 to 1.00 in both models (n 8 to 5; its one miss was a padded clip). Every other share, including every exact@5 row and every cousin, stays inside its interval. Report the guzheng and siku rows with both values.
+- Padding (checked for Test 2). Same split without the 75 padded clips. Guzheng, ney and tabla then have fewer than 10 train clips, so the main set shrinks from 11 to 8 classes (chance 0.125) and those three cannot be checked at k = 10. To isolate padding, the padded data was also run on the same 8 classes. Compare these two files per model, not against the 11-class run (fewer classes raises recall by itself):
+  - with padding, 8 classes: results/test2_fixedset_panns_cnn14_20261119T072341Z.json, results/test2_fixedset_beats_20261119T072348Z.json
+  - without padding, 8 classes: results/test2_unpadded_panns_cnn14_20261119T072142Z.json, results/test2_unpadded_beats_20261119T072147Z.json
+  - Joint probe at k = 5 and 10: every class stays inside the padded run's cluster-bootstrap interval except PANNs flute (k = 5: 0.46 to 0.64; k = 10: 0.45 to 0.65). BEATs: no class moves outside at k = 5 or 10.
+  - k = 1 moves for several classes in both directions; dropping clips changes the training pool and so the drawn clips, and k = 1 is the noisiest point.
+  - Flute's padded clips sit on both sides of the split: 11 of 23 train clips uploaded as flute, 10 of 20 test clips uploaded as dizi. Padding and the dizi-upload mix are entangled in the flute class.
+  - What stays a limitation: PANNs flute; guzheng, ney and tabla at k = 10 (cannot be tested without padded clips); guzheng broad@5 and siku in Test 1.
 - 6 clips are stored at 16 or 22.05 kHz and are upsampled for PANNs (32 kHz).
 - Freesound previews (preview-hq-ogg) for every class, not originals.
 - Ceremonial recordings excluded by rule (label guide).
