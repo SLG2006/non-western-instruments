@@ -39,7 +39,7 @@ Source: split_composition_by_cut_instrument in the Test 2 files. Low flute probe
 - 8 of 18 classes are below 20 usable clips: pipa 7, siku 8, bombo 5, quena 11, qanun 14, oud 15, sitar 17, tabla 19 (labels/summary.json). Report their Test 1 rows with n; they are outside the main Test 2 set.
 - Middle East kept although oud and qanun fall short (CLAUDE.md fallback rule): West African searches returned fewer real candidates (ngoni 0, kora about 6, tambin 0; djembe 104).
 - Few uploaders in some classes: ney 25 clips from 6 source groups; qanun 5; pipa 3.
-- 125 of 806 clips are zero-padded to 10 s (short source recordings); both models average over the padding. Uneven by class (snare_drum 19, tabla 17).
+- 125 of 806 cut clips (75 of 434 usable) are zero-padded to 10 s (short source recordings); both models average over the padding. Uneven by class: flute has 21 padded usable clips of 48 (results/dataset/dataset_table.md).
 - 6 clips are stored at 16 or 22.05 kHz and are upsampled for PANNs (32 kHz).
 - Freesound previews (preview-hq-ogg) for every class, not originals.
 - Ceremonial recordings excluded by rule (label guide).

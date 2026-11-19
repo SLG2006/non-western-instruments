@@ -1,0 +1,322 @@
+{
+ "note": "Draft. Ids are project-namespaced, not Freebase MIDs. Descriptions are unverified; fill citation_uri from a source before release.",
+ "ontology_source": "data/audioset/ontology.json",
+ "ontology_sha256": "9c685f4403eecc3ca9be37fd7285cf212feaaea6ff7229d3e7ca89e0d1f2d15d",
+ "entries": [
+  {
+   "id": "/nwi/erhu",
+   "name": "erhu",
+   "tradition": "chinese",
+   "family": "bowed",
+   "description": "Sounds of a two-stringed Chinese bowed fiddle with a small skin-covered resonator, held upright, with the bow hair passing between the strings.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/0l14_3",
+   "parent_name": "Bowed string instrument",
+   "audioset_tier": 3,
+   "scope": {
+    "includes": [
+     "erhu"
+    ],
+    "excludes": [
+     "jinghu",
+     "gaohu",
+     "zhonghu",
+     "banhu",
+     "'huqin' without erhu"
+    ],
+    "decided": "2026-11-15"
+   },
+   "nwi_usable_clips": 25,
+   "nwi_source_groups": 12,
+   "nwi_positive_examples": [
+    "erhu_fs147662_0",
+    "erhu_fs147662_1",
+    "erhu_fs162078_0"
+   ]
+  },
+  {
+   "id": "/nwi/pipa",
+   "name": "pipa",
+   "tradition": "chinese",
+   "family": "plucked",
+   "description": "Sounds of a four-stringed Chinese plucked lute with a pear-shaped body and frets, held upright.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/0fx80y",
+   "parent_name": "Plucked string instrument",
+   "audioset_tier": 3,
+   "scope": {
+    "includes": [],
+    "excludes": [],
+    "decided": "open in docs/label_guide.md"
+   },
+   "nwi_usable_clips": 7,
+   "nwi_source_groups": 3,
+   "nwi_positive_examples": [
+    "oud_fs115395_0",
+    "pipa_fs162085_0",
+    "pipa_fs162085_1"
+   ]
+  },
+  {
+   "id": "/nwi/dizi",
+   "name": "dizi",
+   "tradition": "chinese",
+   "family": "wind",
+   "description": "Sounds of a Chinese transverse bamboo flute, often fitted with a thin membrane over an extra hole that adds a buzzing timbre.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/0l14j_",
+   "parent_name": "Flute",
+   "audioset_tier": 3,
+   "scope": {
+    "includes": [],
+    "excludes": [],
+    "decided": "open in docs/label_guide.md"
+   },
+   "nwi_usable_clips": 25,
+   "nwi_source_groups": 13,
+   "nwi_positive_examples": [
+    "dizi_fs108242_0",
+    "dizi_fs162054_0",
+    "dizi_fs339341_0"
+   ]
+  },
+  {
+   "id": "/nwi/guzheng",
+   "name": "guzheng",
+   "tradition": "chinese",
+   "family": "zither",
+   "description": "Sounds of a Chinese plucked board zither with many strings over movable bridges.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/01bns_",
+   "parent_name": "Zither",
+   "audioset_tier": 2,
+   "scope": {
+    "includes": [],
+    "excludes": [],
+    "decided": "open in docs/label_guide.md"
+   },
+   "nwi_usable_clips": 25,
+   "nwi_source_groups": 10,
+   "nwi_positive_examples": [
+    "guzheng_fs162088_1",
+    "guzheng_fs24551_0",
+    "guzheng_fs24552_0"
+   ]
+  },
+  {
+   "id": "/nwi/charango",
+   "name": "charango",
+   "tradition": "andean",
+   "family": "plucked",
+   "description": "Sounds of a small Andean plucked lute with five courses of paired strings.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/0fx80y",
+   "parent_name": "Plucked string instrument",
+   "audioset_tier": 3,
+   "scope": {
+    "includes": [
+     "charango",
+     "ronroco",
+     "walaycho (hualaycho)"
+    ],
+    "excludes": [],
+    "decided": "2026-11-16"
+   },
+   "nwi_usable_clips": 30,
+   "nwi_source_groups": 9,
+   "nwi_positive_examples": [
+    "acoustic_guitar_fs218798_0",
+    "acoustic_guitar_fs418280_0",
+    "acoustic_guitar_fs667794_0"
+   ]
+  },
+  {
+   "id": "/nwi/quena",
+   "name": "quena",
+   "tradition": "andean",
+   "family": "wind",
+   "description": "Sounds of an Andean end-blown notched flute, traditionally made of cane, with finger holes.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/0l14j_",
+   "parent_name": "Flute",
+   "audioset_tier": 3,
+   "scope": {
+    "includes": [],
+    "excludes": [],
+    "decided": "open in docs/label_guide.md"
+   },
+   "nwi_usable_clips": 11,
+   "nwi_source_groups": 6,
+   "nwi_positive_examples": [
+    "quena_fs147238_1",
+    "quena_fs147238_2",
+    "quena_fs218037_0"
+   ]
+  },
+  {
+   "id": "/nwi/siku",
+   "name": "siku (zampoña)",
+   "tradition": "andean",
+   "family": "wind",
+   "description": "Sounds of an Andean panpipe (zampona) made of cane tubes, usually in two rows.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/0l14j_",
+   "parent_name": "Flute",
+   "audioset_tier": 3,
+   "scope": {
+    "includes": [],
+    "excludes": [],
+    "decided": "open in docs/label_guide.md"
+   },
+   "nwi_usable_clips": 8,
+   "nwi_source_groups": 6,
+   "nwi_positive_examples": [
+    "ney_fs115398_0",
+    "ney_fs491640_0",
+    "ney_fs491649_0"
+   ]
+  },
+  {
+   "id": "/nwi/bombo",
+   "name": "bombo legüero",
+   "tradition": "andean",
+   "family": "drum",
+   "description": "Sounds of the bombo leguero, a deep double-headed Andean and Argentine drum with a wooden shell and hide heads, struck with a mallet on the head and the rim.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/0bm02",
+   "parent_name": "Bass drum",
+   "audioset_tier": 2,
+   "scope": {
+    "includes": [
+     "bombo leguero",
+     "bombo andino"
+    ],
+    "excludes": [
+     "Western bass drum",
+     "kick drums",
+     "synthesized drums",
+     "maracatu and other non-Andean bombos"
+    ],
+    "decided": "2026-11-16"
+   },
+   "nwi_usable_clips": 5,
+   "nwi_source_groups": 4,
+   "nwi_positive_examples": [
+    "bombo_fs204197_0",
+    "bombo_fs251344_0",
+    "bombo_fs251344_1"
+   ]
+  },
+  {
+   "id": "/nwi/oud",
+   "name": "oud",
+   "tradition": "middle_east",
+   "family": "plucked",
+   "description": "Sounds of a short-necked fretless plucked lute with a pear-shaped body, played with a plectrum in Arab, Turkish and Persian music.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/0fx80y",
+   "parent_name": "Plucked string instrument",
+   "audioset_tier": 3,
+   "scope": {
+    "includes": [],
+    "excludes": [],
+    "decided": "open in docs/label_guide.md"
+   },
+   "nwi_usable_clips": 15,
+   "nwi_source_groups": 7,
+   "nwi_positive_examples": [
+    "oud_fs115226_0",
+    "oud_fs115226_1",
+    "oud_fs115394_0"
+   ]
+  },
+  {
+   "id": "/nwi/ney",
+   "name": "ney",
+   "tradition": "middle_east",
+   "family": "wind",
+   "description": "Sounds of an end-blown, rim-blown cane flute used in Arab, Turkish and Persian music.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/0l14j_",
+   "parent_name": "Flute",
+   "audioset_tier": 3,
+   "scope": {
+    "includes": [],
+    "excludes": [],
+    "decided": "open in docs/label_guide.md"
+   },
+   "nwi_usable_clips": 25,
+   "nwi_source_groups": 6,
+   "nwi_positive_examples": [
+    "ney_fs115222_0",
+    "ney_fs115398_1",
+    "ney_fs115614_0"
+   ]
+  },
+  {
+   "id": "/nwi/qanun",
+   "name": "qanun",
+   "tradition": "middle_east",
+   "family": "zither",
+   "description": "Sounds of a trapezoidal plucked board zither of Arab and Turkish music with many courses of strings and small levers for retuning.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/01bns_",
+   "parent_name": "Zither",
+   "audioset_tier": 2,
+   "scope": {
+    "includes": [],
+    "excludes": [],
+    "decided": "open in docs/label_guide.md"
+   },
+   "nwi_usable_clips": 14,
+   "nwi_source_groups": 5,
+   "nwi_positive_examples": [
+    "guzheng_fs24554_0",
+    "guzheng_fs512943_0",
+    "guzheng_fs512943_2"
+   ]
+  },
+  {
+   "id": "/nwi/darbuka",
+   "name": "darbuka",
+   "tradition": "middle_east",
+   "family": "drum",
+   "description": "Sounds of a single-headed goblet drum played with the hands.",
+   "description_status": "draft, unverified",
+   "citation_uri": "",
+   "parent_id": "/m/026t6",
+   "parent_name": "Drum",
+   "audioset_tier": 2,
+   "scope": {
+    "includes": [
+     "darbuka",
+     "darbouka",
+     "doumbek",
+     "goblet drum"
+    ],
+    "excludes": [
+     "Persian tombak"
+    ],
+    "decided": "label guide note (exclusion column still TODO)"
+   },
+   "nwi_usable_clips": 32,
+   "nwi_source_groups": 14,
+   "nwi_positive_examples": [
+    "darbuka_fs115396_0",
+    "darbuka_fs126096_0",
+    "darbuka_fs140136_0"
+   ]
+  }
+ ]
+}
