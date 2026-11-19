@@ -16,13 +16,13 @@
 | qanun * | 14 (18) | 5 | 6 / 8 | 4 | 0 | 10 | 0 | 14 / 0 | 1 |
 | darbuka | 32 (60) | 14 | 16 / 16 | 3 | 0 | 20 | 9 | 32 / 0 | 4 |
 | **control** | | | | | | | | | |
-| sitar * | 17 (60) | 17 | 8 / 9 | 9 | 0 | 6 | 2 | 15 / 2 | 3 |
+| sitar * | 15 (60) | 15 | 6 / 9 | 9 | 0 | 4 | 2 | 15 / 0 | 3 |
 | tabla * | 19 (60) | 15 | 10 / 9 | 7 | 0 | 8 | 4 | 19 / 0 | 5 |
 | **western** | | | | | | | | | |
 | violin | 45 (60) | 20 | 22 / 23 | 16 | 0 | 16 | 13 | 45 / 0 | 3 |
 | flute | 48 (60) | 13 | 24 / 24 | 14 | 0 | 18 | 16 | 48 / 0 | 21 |
 | acoustic_guitar | 48 (60) | 17 | 24 / 24 | 21 | 0 | 25 | 2 | 48 / 0 | 0 |
 | snare_drum | 35 (60) | 23 | 18 / 17 | 20 | 0 | 14 | 1 | 35 / 0 | 10 |
-| all 18 classes | 434 (806) | | | 151 | 1 | 191 | 91 | 430 / 4 | 75 |
+| all 18 classes | 432 (806) | | | 151 | 1 | 189 | 91 | 430 / 2 | 75 |
 
 usable = human label, solo, confident (a clip counts for the instrument heard, not the one searched); cut = clips cut from recordings found under that instrument; * below 20 usable clips.

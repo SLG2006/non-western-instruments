@@ -5,10 +5,12 @@ Decided 2026-11-19. These are caveats and file pointers, not interpretation.
 ## Primary result files
 | Test | PANNs CNN14 | BEATs |
 |---|---|---|
-| Test 1 (with family@1) | results/test1_panns_cnn14_20261119T065124Z.json | results/test1_beats_20261119T065131Z.json |
-| Test 2 (with split composition) | results/test2_panns_cnn14_20261119T070343Z.json | results/test2_beats_20261119T070346Z.json |
+| Test 1 (with family@1) | results/test1_panns_cnn14_20261119T223345Z.json | results/test1_beats_20261119T223343Z.json |
+| Test 2 (with split composition) | results/test2_panns_cnn14_20261119T223334Z.json | results/test2_beats_20261119T223324Z.json |
 
-Earlier files in results/ are kept and superseded: test1_*_20261119T0617/0639 (no family@1), test2_*_20261119T0651 (same probe numbers, no split composition).
+Earlier files in results/ are kept and superseded: test1_*_20261119T0617/0639 (no family@1), test2_*_20261119T0651 (same probe numbers, no split composition), and every run before 20261119T2233 (dataset v1.0.0, 434 clips).
+
+Rerun 2026-11-19 for dataset v1.0.1: the author rejected the two bowed sitar clips (sitar_wc88877956_0, sitar_wc105114161_0; label guide exclusion), leaving 432 usable clips. Both clips were train-side and one recording uploaded twice. The two rows were dropped from data/splits.csv with no reshuffle. Effect: Test 1 changes only in the sitar rows (n 17 to 15); Test 2 main and fixed-set probes (no sitar) are identical to the earlier runs; supp_ probes change.
 
 Checkpoints and cited mAP: docs/model_metadata.md.
 
@@ -36,13 +38,13 @@ Source: split_composition_by_cut_instrument in the Test 2 files. Low flute probe
 
 ## Other limits to list
 - One labeler. Intra-rater self-agreement on a seeded 10% blind relabel: n = 92, raw 0.717, Cohen's kappa 0.65 (labels/agreement.json). Of 26 disagreements: 13 within one family (winds 7, drums 3, bowed 2, oud vs qanun 1); 3 across families (violin to ney, ney to erhu, acoustic_guitar to flute); 9 reject vs instrument; 1 instrument vs unsure. Siku has no clip in the relabel sample.
-- 8 of 18 classes are below 20 usable clips: pipa 7, siku 8, bombo 5, quena 11, qanun 14, oud 15, sitar 17, tabla 19 (labels/summary.json). Report their Test 1 rows with n; they are outside the main Test 2 set.
+- 8 of 18 classes are below 20 usable clips: pipa 7, siku 8, bombo 5, quena 11, qanun 14, oud 15, sitar 15, tabla 19 (labels/summary.json). Report their Test 1 rows with n; they are outside the main Test 2 set.
 - Middle East kept although oud and qanun fall short (CLAUDE.md fallback rule): West African searches returned fewer real candidates (ngoni 0, kora about 6, tambin 0; djembe 104).
 - Few uploaders in some classes: ney 25 clips from 6 source groups; qanun 5; pipa 3.
-- Padding (checked for Test 1). 75 of 434 usable clips are zero-padded to 10 s; flute has 21 of 48 (results/dataset/dataset_table.md). Test 1 rerun without them: results/test1_unpadded_panns_cnn14_20261119T071500Z.json and results/test1_unpadded_beats_20261119T071501Z.json. Shares that move outside the full-run Wilson interval: guzheng broad@5 (Zither) rises from 0.60 to 0.78 (PANNs) and 0.80 to 0.94 (BEATs) when its 7 padded clips are dropped; guzheng family@5 (BEATs) 0.96 to 1.00; siku family@1 and family@5 0.88 to 1.00 in both models (n 8 to 5; its one miss was a padded clip). Every other share, including every exact@5 row and every cousin, stays inside its interval. Report the guzheng and siku rows with both values.
+- Padding (checked for Test 1). 75 of 432 usable clips are zero-padded to 10 s; flute has 21 of 48 (results/dataset/dataset_table.md). Test 1 rerun without them: results/test1_unpadded_panns_cnn14_20261119T223346Z.json and results/test1_unpadded_beats_20261119T223344Z.json. Shares that move outside the full-run Wilson interval: guzheng broad@5 (Zither) rises from 0.60 to 0.78 (PANNs) and 0.80 to 0.94 (BEATs) when its 7 padded clips are dropped; guzheng family@5 (BEATs) 0.96 to 1.00; siku family@1 and family@5 0.88 to 1.00 in both models (n 8 to 5; its one miss was a padded clip). Every other share, including every exact@5 row and every cousin, stays inside its interval. Report the guzheng and siku rows with both values.
 - Padding (checked for Test 2). Same split without the 75 padded clips. Guzheng, ney and tabla then have fewer than 10 train clips, so the main set shrinks from 11 to 8 classes (chance 0.125) and those three cannot be checked at k = 10. To isolate padding, the padded data was also run on the same 8 classes. Compare these two files per model, not against the 11-class run (fewer classes raises recall by itself):
-  - with padding, 8 classes: results/test2_fixedset_panns_cnn14_20261119T072341Z.json, results/test2_fixedset_beats_20261119T072348Z.json
-  - without padding, 8 classes: results/test2_unpadded_panns_cnn14_20261119T072142Z.json, results/test2_unpadded_beats_20261119T072147Z.json
+  - with padding, 8 classes: results/test2_fixedset_panns_cnn14_20261119T223441Z.json, results/test2_fixedset_beats_20261119T223436Z.json
+  - without padding, 8 classes: results/test2_unpadded_panns_cnn14_20261119T223339Z.json, results/test2_unpadded_beats_20261119T223328Z.json
   - Joint probe at k = 5 and 10: every class stays inside the padded run's cluster-bootstrap interval except PANNs flute (k = 5: 0.46 to 0.64; k = 10: 0.45 to 0.65). BEATs: no class moves outside at k = 5 or 10.
   - k = 1 moves for several classes in both directions; dropping clips changes the training pool and so the drawn clips, and k = 1 is the noisiest point.
   - Flute's padded clips sit on both sides of the split: 11 of 23 train clips uploaded as flute, 10 of 20 test clips uploaded as dizi. Padding and the dizi-upload mix are entangled in the flute class.

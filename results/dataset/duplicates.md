@@ -8,10 +8,10 @@ differ). A cross-correlation near 1 means the same audio.
 | clip A | clip B | xcorr | side | note |
 |---|---|---|---|---|
 | dizi_fs108242_0 (freesound:gorgoroth6669) | dizi_wc46272858_0 (commons:mx. granger) | 0.999 | test | Commons file credits Freesound user Gorgoroth6669 as author: a re-upload |
-| sitar_wc88877956_0 (commons:computerhotline) | sitar_wc105114161_0 (commons:jacqke) | 0.992 | train | both are Samuel Corwin, "A Man Approaches with Bowed Sitar, Rishikesh" |
+| sitar_wc88877956_0 (commons:computerhotline) | sitar_wc105114161_0 (commons:jacqke) | 0.992 | train | both are Samuel Corwin, "A Man Approaches with Bowed Sitar, Rishikesh". Both rejected by the author in v1.0.1 (bowed sitar excluded by the label guide); not in the release |
 
-Effect: dizi test has 13 clips of which 2 are one recording; sitar train has 8 of which 2 are one recording.
-Both pairs should share a split_group. Proposed for v1.1 (not applied; human decision): keep the Freesound / first
+Effect: dizi test has 13 clips of which 2 are one recording. (v1.0.0 only: sitar train had 8 of which 2 were one recording.)
+The dizi pair should share a split_group. Proposed for v1.1 (not applied; human decision): keep the Freesound
 copy, drop the other, set split_group to the author.
 
 ## Near-identical takes from one uploader (same source group, same side)
