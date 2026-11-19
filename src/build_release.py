@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the dataset v1 release folder and zip (local only; the human uploads).
 
-  .venv/bin/python src/build_release.py [--version 1.0.0] [--dry-run]
+  .venv/bin/python src/build_release.py [--version 1.0.1] [--dry-run]
 
 Release content (decided 2026-11-19): audio for the usable clips only (human pass-1 label, solo, confident);
 labels for all cut clips; split licensing (labels, metadata and splits under CC BY-NC 4.0; each clip keeps
@@ -175,7 +175,7 @@ def build(version, dry_run=False):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--version", default="1.0.0")
+    ap.add_argument("--version", required=True)
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args(argv)
     build(a.version, a.dry_run)

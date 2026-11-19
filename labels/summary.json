@@ -4,7 +4,7 @@
  "dropped": {
   "not_solo": 34,
   "not_confident": 21,
-  "reject": 308,
+  "reject": 310,
   "unsure": 9
  },
  "usable": {
@@ -69,8 +69,8 @@
    "meets_minimum": true
   },
   "sitar": {
-   "clips": 17,
-   "source_groups": 17,
+   "clips": 15,
+   "source_groups": 15,
    "meets_minimum": false
   },
   "tabla": {

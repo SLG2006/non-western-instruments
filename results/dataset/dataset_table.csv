@@ -11,7 +11,7 @@ oud,middle_east,target,plucked,acoustic_guitar,29,15,7,3,7,8,8,0,7,0,,15,0,3,Fal
 ney,middle_east,target,wind,flute,42,25,6,5,12,13,1,0,10,14,,25,0,7,True
 qanun,middle_east,target,zither,acoustic_guitar,18,14,5,3,6,8,4,0,10,0,,14,0,1,False
 darbuka,middle_east,target,drum,snare_drum,60,32,14,3,16,16,3,0,20,9,,32,0,4,True
-sitar,control,control,plucked,acoustic_guitar,60,17,17,0,8,9,9,0,6,2,,15,2,3,False
+sitar,control,control,plucked,acoustic_guitar,60,15,15,0,6,9,9,0,4,2,,15,0,3,False
 tabla,control,control,drum,snare_drum,60,19,15,1,10,9,7,0,8,4,,19,0,5,False
 violin,western,cousin,bowed,,60,45,20,2,22,23,16,0,16,13,,45,0,3,True
 flute,western,cousin,wind,,60,48,13,21,24,24,14,0,18,16,,48,0,21,True

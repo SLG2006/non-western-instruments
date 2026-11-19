@@ -3,14 +3,14 @@
  "metadata": {
   "upload_type": "dataset",
   "title": "NWI solo instrument clips: human-labeled 10-second clips of Chinese, Andean and Middle Eastern instruments with controls and Western cousins",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "creators": [
    {"name": "León Garavito, Santiago", "affiliation": "University of Oklahoma"}
   ],
   "contributors": [
    {"name": "Cao, Jie", "affiliation": "University of Oklahoma", "type": "Supervisor"}
   ],
-  "description": "<p>434 human-labeled 10-second solo clips of 12 instruments from three traditions (Chinese: erhu, pipa, dizi, guzheng; Andean: charango, quena, siku, bombo legüero; Middle Eastern: oud, ney, qanun, darbuka), two controls with their own AudioSet labels (sitar, tabla) and four Western cousins (violin, flute, acoustic guitar, snare drum), from Freesound and Wikimedia Commons. Built to measure AudioSet-trained audio models per instrument.</p><p>One labeler labeled every clip by ear in a blind queue; intra-rater self-agreement on a 10% relabel: Cohen's kappa 0.65 (n = 92). Includes labels for all 806 cut clips, uploader-disjoint train/test splits, a credit line for every clip, an AudioSet-style extension entry per instrument, a label guide and a datasheet.</p><p>Labels, metadata and splits: CC BY-NC 4.0. Each audio clip keeps its original license (CC0, public domain, CC BY, CC BY-NC); see LICENSE.md and credits.csv.</p>",
+  "description": "<p>432 human-labeled 10-second solo clips of 12 instruments from three traditions (Chinese: erhu, pipa, dizi, guzheng; Andean: charango, quena, siku, bombo legüero; Middle Eastern: oud, ney, qanun, darbuka), two controls with their own AudioSet labels (sitar, tabla) and four Western cousins (violin, flute, acoustic guitar, snare drum), from Freesound and Wikimedia Commons. Built to measure AudioSet-trained audio models per instrument.</p><p>One labeler labeled every clip by ear in a blind queue; intra-rater self-agreement on a 10% relabel: Cohen's kappa 0.65 (n = 92). Includes labels for all 806 cut clips, uploader-disjoint train/test splits, a credit line for every clip, an AudioSet-style extension entry per instrument, a label guide and a datasheet.</p><p>Labels, metadata and splits: CC BY-NC 4.0. Each audio clip keeps its original license (CC0, public domain, CC BY, CC BY-NC); see LICENSE.md and credits.csv.</p>",
   "access_right": "open",
   "license": "cc-by-nc-4.0",
   "keywords": ["musical instrument recognition", "AudioSet", "world music", "erhu", "pipa", "dizi", "guzheng", "charango", "quena", "siku", "oud", "ney", "qanun", "darbuka", "dataset"],

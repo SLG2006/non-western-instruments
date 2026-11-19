@@ -2,7 +2,7 @@
 
 **What it is.** 10-second mono clips of solo playing for 12 instruments from three traditions (Chinese: erhu, pipa, dizi, guzheng; Andean: charango, quena, siku, bombo legüero; Middle Eastern: oud, ney, qanun, darbuka), two controls with their own AudioSet labels (sitar, tabla) and four Western cousins (violin, flute, acoustic guitar, snare drum). Built to measure frozen AudioSet models per instrument, not to train them.
 
-**Size.** 806 clips cut; 434 usable (labeled solo and confident by ear) from 370 recordings and 161 uploaders. Per-instrument counts, splits, licenses and sources: `results/dataset/dataset_table.md`. 8 of 18 classes have fewer than 20 usable clips (pipa 7, bombo 5, siku 8, quena 11, qanun 14, oud 15, sitar 17, tabla 19).
+**Size.** 806 clips cut; 432 usable (labeled solo and confident by ear) from 368 recordings and 159 uploaders. Per-instrument counts, splits, licenses and sources: `results/dataset/dataset_table.md`. 8 of 18 classes have fewer than 20 usable clips (pipa 7, bombo 5, siku 8, quena 11, qanun 14, oud 15, sitar 15, tabla 19).
 
 **Sources.** Freesound (430 usable clips) and Wikimedia Commons (4). Search metadata retrieved 2026-11-16 (UTC). Freesound audio is the `preview-hq-ogg` preview for every class, not the original upload; Commons audio is the original file. Clips are stored at the source sample rate.
 

@@ -14,7 +14,7 @@ The license, its URL, the author and the source page of every clip are in `metad
 
 | License | Clips |
 |---|---|
-| CC BY 4.0 | 171 |
+| CC BY 4.0 | 169 |
 | CC0 1.0 | 151 |
 | CC BY-NC 4.0 | 83 |
 | CC BY 3.0 | 20 |
