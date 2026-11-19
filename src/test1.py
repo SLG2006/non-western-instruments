@@ -36,6 +36,7 @@ PROPOSED_EXCLUDED_INSTRUMENT_NODES = ()
 PROPOSED_BROAD_LABELS = {"guzheng": "Zither", "qanun": "Zither", "darbuka": "Drum", "bombo": "Bass drum"}
 
 TOP_K = 5
+PADDED_BELOW = 9.995  # content_s below this means the clip was zero-padded to 10 s (same cut as n_padded)
 BOOT_REPS = 2000
 
 
@@ -160,7 +161,7 @@ def render(table, title):
     return "\n".join(lines)
 
 
-def run(model, class_labels, ontology, features=None, dry_run=False, allow_dirty=False):
+def run(model, class_labels, ontology, features=None, dry_run=False, allow_dirty=False, exclude_padded=False):
     warnings = E.require_gates()
     prov = E.dataset_commit()
     if prov["dataset_dirty"] and not allow_dirty:
@@ -179,15 +180,22 @@ def run(model, class_labels, ontology, features=None, dry_run=False, allow_dirty
     meta, probs, _, cs = F.load_features(fdir, clip_ids)
     if meta["class_labels_sha256"] != E.sha256_file(class_labels):
         raise SystemExit("features were computed with a different class_labels_indices.csv")
-    groups = {c: man[c]["source_group"] for c in clip_ids}
     content = dict(zip(clip_ids, cs.tolist()))
+    n_padded_dropped = 0
+    if exclude_padded:  # sensitivity run: only clips with a full 10 s of source audio
+        keep = np.array([content[c] >= PADDED_BELOW for c in clip_ids])
+        n_padded_dropped = int((~keep).sum())
+        clip_ids = [c for c, k in zip(clip_ids, keep) if k]
+        probs = probs[keep]
+        labels = {c: labels[c] for c in clip_ids}
+    groups = {c: man[c]["source_group"] for c in clip_ids}
     seed = C.cfg("pipeline")["seed"]
     imask = instrument_mask(classes, onto)
     full = np.ones(len(classes), dtype=bool)
     t_ins, pc_ins = score(clip_ids, labels, groups, probs, classes, onto, imask, TOP_K, seed, content)
     t_all, pc_all = score(clip_ids, labels, groups, probs, classes, onto, full, TOP_K, seed, content)
     payload = {
-        "experiment": "test1_zero_shot", "model": model, "checkpoint_sha256": meta["checkpoint_sha256"],
+        "experiment": "test1_zero_shot_unpadded" if exclude_padded else "test1_zero_shot", "model": model, "checkpoint_sha256": meta["checkpoint_sha256"],
         "checkpoint_name": meta["checkpoint_name"], "seed": seed, **prov, "dataset_files_sha256": E.file_hashes(),
         "created_at": E.now(), "n_clips": len(clip_ids), "features_meta": meta,
         "class_labels_sha256": E.sha256_file(class_labels), "ontology_sha256": E.sha256_file(ontology),
@@ -197,7 +205,9 @@ def run(model, class_labels, ontology, features=None, dry_run=False, allow_dirty
                      "family_top1": "the top-ranked class is an audioset_family node or ontology descendant",
                      "instrument_root": PROPOSED_INSTRUMENT_ROOT,
                      "excluded_instrument_nodes": list(PROPOSED_EXCLUDED_INSTRUMENT_NODES),
-                     "broad_labels": PROPOSED_BROAD_LABELS},
+                     "broad_labels": PROPOSED_BROAD_LABELS,
+                     "exclude_padded": exclude_padded, "padded_below_s": PADDED_BELOW,
+                     "n_padded_dropped": n_padded_dropped},
         "gate_warnings": warnings, "config_label_check": cfg_check,
         "metrics": {"instrument_nodes": [n for (m, n), keep in zip(classes, imask) if keep],
                     "primary_instrument_nodes_only": t_ins, "secondary_unfiltered": t_all},
@@ -207,7 +217,7 @@ def run(model, class_labels, ontology, features=None, dry_run=False, allow_dirty
     print(render(t_ins, f"{model}: top-{TOP_K} over instrument nodes (primary)"))
     print()
     print(render(t_all, f"{model}: top-{TOP_K} over all 527 classes (secondary)"))
-    return E.write_result("test1", model, payload, dry_run)
+    return E.write_result("test1_unpadded" if exclude_padded else "test1", model, payload, dry_run)
 
 
 def main(argv=None):
@@ -217,6 +227,8 @@ def main(argv=None):
     ap.add_argument("--class-labels", required=True)
     ap.add_argument("--ontology", required=True)
     ap.add_argument("--features", help="features directory (default: the only one under data/features/<model>/)")
+    ap.add_argument("--exclude-padded", action="store_true",
+                    help="sensitivity run: drop clips zero-padded to 10 s (content_s below 9.995 s)")
     ap.add_argument("--allow-dirty", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args(argv)
@@ -228,7 +240,7 @@ def main(argv=None):
         return 0 if all(r["ok"] for r in rows) else 1
     if not a.model:
         ap.error("--model is required for run")
-    run(a.model, a.class_labels, a.ontology, a.features, a.dry_run, a.allow_dirty)
+    run(a.model, a.class_labels, a.ontology, a.features, a.dry_run, a.allow_dirty, a.exclude_padded)
     return 0
 
 
